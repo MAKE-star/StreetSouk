@@ -1,0 +1,1506 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>STREET SOUK — Drop Portal</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --neon: #00ff00;
+        --neon-dim: #00cc00;
+        --neon-glow: rgba(0, 255, 0, 0.15);
+        --black: #030303;
+        --surface: #0d0d0d;
+        --surface2: #141414;
+        --border: rgba(0, 255, 0, 0.2);
+        --text: #e8e8e8;
+        --muted: #888;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        background: var(--black);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        overflow-x: hidden;
+      }
+      /* NAV */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        background: rgba(3, 3, 3, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+      }
+      .logo {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2rem;
+        color: var(--neon);
+        letter-spacing: 0.05em;
+        text-decoration: none;
+      }
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.8rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        font-family: "Space Mono", monospace;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--neon);
+      }
+
+      /* HERO */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 6rem 2rem 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 60% 40% at 50% 60%,
+          rgba(0, 255, 0, 0.07) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-tag {
+        font-family: "Space Mono", monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: var(--neon);
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border);
+        padding: 0.4rem 1rem;
+        display: inline-block;
+      }
+      .hero h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(4rem, 12vw, 10rem);
+        line-height: 0.9;
+        color: var(--text);
+        letter-spacing: 0.02em;
+        margin-bottom: 1.5rem;
+      }
+      .hero h1 span {
+        color: var(--neon);
+      }
+      .hero-sub {
+        font-size: 1rem;
+        color: var(--muted);
+        max-width: 480px;
+        line-height: 1.7;
+        margin-bottom: 3rem;
+      }
+      .btn-primary {
+        background: var(--neon);
+        color: var(--black);
+        border: none;
+        padding: 1rem 2.5rem;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn-primary:hover {
+        background: #fff;
+        transform: translateY(-2px);
+      }
+      .btn-outline {
+        background: transparent;
+        color: var(--neon);
+        border: 1px solid var(--neon);
+        padding: 0.8rem 2rem;
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.1rem;
+        letter-spacing: 0.1em;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        background: var(--neon-glow);
+      }
+
+      .scroll-indicator {
+        position: absolute;
+        bottom: 2rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(8px);
+        }
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 6rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .section-header {
+        display: flex;
+        align-items: baseline;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .section-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.25em;
+        color: var(--neon);
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .section-title {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(2.5rem, 5vw, 4rem);
+        letter-spacing: 0.05em;
+        color: var(--text);
+        line-height: 1;
+      }
+      .tech-badge {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: var(--black);
+        background: var(--neon);
+        padding: 0.2rem 0.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      /* PRODUCTS */
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+      .product-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        overflow: hidden;
+        transition:
+          border-color 0.3s,
+          transform 0.3s;
+        animation: fadeUp 0.6s ease both;
+      }
+      .product-card:hover {
+        border-color: var(--neon);
+        transform: translateY(-4px);
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .product-card:nth-child(2) {
+        animation-delay: 0.1s;
+      }
+      .product-card:nth-child(3) {
+        animation-delay: 0.2s;
+      }
+      .product-img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        background: var(--surface2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .product-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .hoodie-svg {
+        width: 120px;
+        opacity: 0.8;
+      }
+      .product-tag {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .tag-new {
+        background: var(--neon);
+        color: var(--black);
+        padding: 0.2rem 0.6rem;
+        font-weight: 700;
+      }
+      .tag-sold {
+        background: #ff3333;
+        color: #fff;
+        padding: 0.2rem 0.6rem;
+        font-weight: 700;
+      }
+      .product-info {
+        padding: 1.25rem;
+      }
+      .product-brand {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--neon);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 0.4rem;
+      }
+      .product-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.5rem;
+      }
+      .product-variants {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .variant-pill {
+        font-family: "Space Mono", monospace;
+        font-size: 0.55rem;
+        letter-spacing: 0.1em;
+        border: 1px solid var(--border);
+        padding: 0.2rem 0.5rem;
+        color: var(--muted);
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+      }
+      .variant-pill:hover,
+      .variant-pill.active {
+        border-color: var(--neon);
+        color: var(--neon);
+      }
+      .product-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border);
+      }
+      .price {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 1.5rem;
+        color: var(--neon);
+      }
+      .add-btn {
+        background: transparent;
+        border: 1px solid var(--neon);
+        color: var(--neon);
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .add-btn:hover {
+        background: var(--neon);
+        color: var(--black);
+      }
+
+      /* GRAPHQL PANEL */
+      .graphql-panel {
+        margin-top: 2rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        overflow: hidden;
+      }
+      .panel-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1.25rem;
+        background: var(--surface2);
+        border-bottom: 1px solid var(--border);
+        cursor: pointer;
+      }
+      .panel-header-left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .dot-r {
+        background: #ff5f56;
+      }
+      .dot-y {
+        background: #ffbd2e;
+      }
+      .dot-g {
+        background: var(--neon);
+      }
+      .panel-title {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+      }
+      .panel-body {
+        padding: 1.25rem;
+        display: none;
+      }
+      .panel-body.open {
+        display: block;
+      }
+      pre {
+        font-family: "Space Mono", monospace;
+        font-size: 0.7rem;
+        line-height: 1.7;
+        color: #ccc;
+        white-space: pre-wrap;
+      }
+      .kw {
+        color: #ff79c6;
+      }
+      .str {
+        color: var(--neon);
+      }
+      .type {
+        color: #8be9fd;
+      }
+      .field {
+        color: #f8f8f2;
+      }
+      .cmt {
+        color: #555;
+      }
+
+      /* REGISTRATION FORM */
+      .form-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        align-items: start;
+      }
+      @media (max-width: 768px) {
+        .form-wrapper {
+          grid-template-columns: 1fr;
+        }
+      }
+      .form-description {
+        padding-top: 1rem;
+      }
+      .form-description h3 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.5rem;
+        letter-spacing: 0.05em;
+        margin-bottom: 1rem;
+        line-height: 1;
+      }
+      .form-description h3 span {
+        color: var(--neon);
+      }
+      .form-description p {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+      }
+      .form-stat {
+        display: flex;
+        gap: 2rem;
+      }
+      .stat {
+      }
+      .stat-num {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.5rem;
+        color: var(--neon);
+        line-height: 1;
+      }
+      .stat-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .reg-form {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        padding: 2rem;
+      }
+      .form-steps {
+        display: flex;
+        gap: 0;
+        margin-bottom: 2rem;
+      }
+      .step-tab {
+        flex: 1;
+        text-align: center;
+        padding: 0.6rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border-bottom: 2px solid var(--border);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .step-tab.active {
+        color: var(--neon);
+        border-bottom-color: var(--neon);
+      }
+      .form-step {
+        display: none;
+      }
+      .form-step.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateX(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+      .field-group {
+        margin-bottom: 1.25rem;
+      }
+      .field-label {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--muted);
+        display: block;
+        margin-bottom: 0.4rem;
+      }
+      .field-input,
+      .field-select,
+      .field-textarea {
+        width: 100%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.8rem 1rem;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+        appearance: none;
+      }
+      .field-input:focus,
+      .field-select:focus,
+      .field-textarea:focus {
+        border-color: var(--neon);
+      }
+      .field-textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .field-select {
+        cursor: pointer;
+      }
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.8rem;
+        transition: all 0.2s;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .checkbox-item.checked {
+        border-color: var(--neon);
+        color: var(--neon);
+      }
+      .checkbox-item input {
+        display: none;
+      }
+      .form-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+      .step-counter {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+      }
+      .supabase-toast {
+        display: none;
+        background: var(--surface2);
+        border: 1px solid var(--neon);
+        padding: 1rem 1.25rem;
+        margin-top: 1rem;
+        animation: slideIn 0.3s ease;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .toast-header {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        color: var(--neon);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+      }
+      .toast-dot {
+        width: 6px;
+        height: 6px;
+        background: var(--neon);
+        border-radius: 50%;
+        animation: pulse 1s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .toast-body {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .toast-row {
+        color: var(--text);
+      }
+      .toast-key {
+        color: var(--neon);
+      }
+
+      /* RSVP */
+      .rsvp-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+      .event-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 2rem;
+        padding: 2.5rem;
+        border-bottom: 1px solid var(--border);
+        align-items: center;
+      }
+      @media (max-width: 640px) {
+        .event-card {
+          grid-template-columns: 1fr;
+        }
+      }
+      .event-meta {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        margin-bottom: 1rem;
+      }
+      .event-meta-item {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .meta-label {
+        color: var(--muted);
+        margin-bottom: 0.2rem;
+      }
+      .meta-val {
+        color: var(--neon);
+      }
+      .event-name {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.5rem;
+        letter-spacing: 0.05em;
+        line-height: 1;
+        margin-bottom: 0.75rem;
+      }
+      .event-desc {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .rsvp-action {
+        text-align: center;
+      }
+      .ticket-counter {
+        font-family: "Space Mono", monospace;
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .ticket-num {
+        color: var(--neon);
+        font-size: 1.5rem;
+        font-family: "Bebas Neue", sans-serif;
+        display: block;
+      }
+      .rsvp-form-inline {
+        padding: 2rem 2.5rem;
+      }
+      .rsvp-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr auto;
+        gap: 1rem;
+        align-items: end;
+      }
+      @media (max-width: 640px) {
+        .rsvp-row {
+          grid-template-columns: 1fr;
+        }
+      }
+      .brevo-log {
+        display: none;
+        margin-top: 1.5rem;
+        background: #000;
+        border: 1px solid var(--border);
+        padding: 1rem 1.25rem;
+        animation: fadeIn 0.3s ease;
+      }
+      .log-line {
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        line-height: 2;
+        color: #555;
+      }
+      .log-line.active {
+        color: var(--neon);
+      }
+      .log-line.done {
+        color: #555;
+      }
+      .log-prefix {
+        color: #333;
+      }
+      .log-api {
+        color: #8be9fd;
+      }
+      .log-ok {
+        color: var(--neon);
+      }
+      .log-warn {
+        color: #f1fa8c;
+      }
+
+      /* FOOTER */
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem;
+        text-align: center;
+        font-family: "Space Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      footer span {
+        color: var(--neon);
+      }
+
+      /* SECTION DIVIDER */
+      .divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--neon),
+          transparent
+        );
+        opacity: 0.3;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="logo" href="#">STREET SOUK</a>
+      <ul class="nav-links">
+        <li><a href="#drops">Drops</a></li>
+        <li><a href="#register">Register</a></li>
+        <li><a href="#events">Events</a></li>
+      </ul>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+      <span class="hero-tag">// Next Drop — Lagos · 14 June 2025</span>
+      <h1>HYPE<br /><span>DROP</span><br />PORTAL</h1>
+      <p class="hero-sub">
+        Africa's premier streetwear marketplace. Register your brand, cop the
+        latest drops, and RSVP for the next pop-up.
+      </p>
+      <a href="#drops" class="btn-primary">View Current Drop</a>
+      <div class="scroll-indicator">↓ scroll</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- FEATURE A: SHOPIFY GRAPHQL MOCK STOREFRONT -->
+    <section id="drops">
+      <div class="section-header">
+        <span class="section-label">// Feature A</span>
+        <h2 class="section-title">Current Drop</h2>
+        <span class="tech-badge">Shopify GraphQL</span>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Cards injected by JS to simulate GraphQL response -->
+      </div>
+
+      <div class="graphql-panel" style="margin-top: 2rem">
+        <div class="panel-header" onclick="togglePanel(this)">
+          <div class="panel-header-left">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+            <span class="panel-title"
+              >shopify-graphql.ts — GET_PRODUCT_DROP query</span
+            >
+          </div>
+          <span
+            style="
+              font-family: &quot;Space Mono&quot;, monospace;
+              font-size: 0.6rem;
+              color: var(--muted);
+            "
+            >▼ expand</span
+          >
+        </div>
+        <div class="panel-body" id="code-panel">
+          <pre><span class="cmt">// lib/shopify.ts — Shopify Storefront API (Headless)</span>
+<span class="cmt">// Demonstrates GraphQL query structure for product variants + pricing</span>
+
+<span class="kw">const</span> <span class="field">SHOPIFY_STOREFRONT_URL</span> = <span class="str">`https://streetsouk.myshopify.com/api/2024-01/graphql.json`</span>;
+
+<span class="kw">export const</span> <span class="field">GET_PRODUCT_DROP</span> = <span class="str">`
+  query getLatestDrop($handle: String!) {
+    product(handle: $handle) {
+      id
+      title
+      description
+      tags
+      images(first: 3) {
+        edges { node { url altText } }
+      }
+      variants(first: 10) {
+        edges {
+          node {
+            id
+            title
+            availableForSale
+            price { amount currencyCode }
+            selectedOptions { name value }
+          }
+        }
+      }
+    }
+  }
+`</span>;
+
+<span class="cmt">// API call with access token — this returns what you see rendered above</span>
+<span class="kw">export async function</span> <span class="type">fetchProduct</span>(<span class="field">handle</span>: <span class="type">string</span>) {
+  <span class="kw">const</span> <span class="field">res</span> = <span class="kw">await</span> fetch(<span class="field">SHOPIFY_STOREFRONT_URL</span>, {
+    method: <span class="str">'POST'</span>,
+    headers: {
+      <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span>,
+      <span class="str">'X-Shopify-Storefront-Access-Token'</span>: process.env.<span class="field">SHOPIFY_TOKEN</span>!
+    },
+    body: <span class="field">JSON</span>.stringify({
+      query: <span class="field">GET_PRODUCT_DROP</span>,
+      variables: { handle }
+    })
+  });
+  <span class="kw">return</span> (<span class="kw">await</span> <span class="field">res</span>.json()).<span class="field">data</span>.<span class="field">product</span>;
+}</pre>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FEATURE B: BRAND REGISTRATION -->
+    <section id="register">
+      <div class="section-header">
+        <span class="section-label">// Feature B</span>
+        <h2 class="section-title">Brand Registration</h2>
+        <span class="tech-badge">Supabase + Framer Motion</span>
+      </div>
+
+      <div class="form-wrapper">
+        <div class="form-description">
+          <h3>Register your<br /><span>brand</span> today.</h3>
+          <p>
+            Apply to showcase your streetwear label at the next Street Souk
+            pop-up. Data flows directly into Supabase — authenticated,
+            real-time, and ready.
+          </p>
+          <div class="form-stat">
+            <div class="stat">
+              <div class="stat-num">42</div>
+              <div class="stat-label">Brands registered</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">8</div>
+              <div class="stat-label">Spots remaining</div>
+            </div>
+          </div>
+
+          <div class="graphql-panel" style="margin-top: 2rem">
+            <div class="panel-header" onclick="togglePanel(this)">
+              <div class="panel-header-left">
+                <div class="dot dot-r"></div>
+                <div class="dot dot-y"></div>
+                <div class="dot dot-g"></div>
+                <span class="panel-title">supabaseClient.ts</span>
+              </div>
+              <span
+                style="
+                  font-family: &quot;Space Mono&quot;, monospace;
+                  font-size: 0.6rem;
+                  color: var(--muted);
+                "
+                >▼ expand</span
+              >
+            </div>
+            <div class="panel-body">
+              <pre><span class="cmt">// lib/supabaseClient.ts</span>
+<span class="kw">import</span> { createClient } <span class="kw">from</span> <span class="str">'@supabase/supabase-js'</span>;
+
+<span class="kw">export const</span> <span class="field">supabase</span> = createClient(
+  process.env.<span class="field">NEXT_PUBLIC_SUPABASE_URL</span>!,
+  process.env.<span class="field">NEXT_PUBLIC_SUPABASE_ANON_KEY</span>!
+);
+
+<span class="cmt">// components/RegisterForm.tsx — submission handler</span>
+<span class="kw">const</span> <span class="field">handleSubmit</span> = <span class="kw">async</span> () => {
+  <span class="kw">const</span> { <span class="field">data</span>, <span class="field">error</span> } = <span class="kw">await</span> <span class="field">supabase</span>
+    .from(<span class="str">'brand_registrations'</span>)
+    .insert([{
+      brand_name: <span class="field">form</span>.<span class="field">brandName</span>,
+      designer_name: <span class="field">form</span>.<span class="field">designerName</span>,
+      category: <span class="field">form</span>.<span class="field">category</span>,
+      instagram: <span class="field">form</span>.<span class="field">instagram</span>,
+      bio: <span class="field">form</span>.<span class="field">bio</span>,
+      created_at: <span class="kw">new</span> Date()
+    }]);
+
+  <span class="kw">if</span> (!<span class="field">error</span>) triggerBrevoConfirmation(<span class="field">data</span>[0]);
+};</pre>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="reg-form">
+            <div class="form-steps">
+              <div class="step-tab active" data-step="1">01 Brand</div>
+              <div class="step-tab" data-step="2">02 Designer</div>
+              <div class="step-tab" data-step="3">03 Submit</div>
+            </div>
+
+            <!-- Step 1 -->
+            <div class="form-step active" id="step-1">
+              <div class="field-group">
+                <label class="field-label">Brand Name *</label>
+                <input
+                  class="field-input"
+                  type="text"
+                  id="brand-name"
+                  placeholder="e.g. VOID Lagos"
+                />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Category *</label>
+                <select class="field-select" id="category">
+                  <option value="">Select category</option>
+                  <option>Streetwear</option>
+                  <option>Accessories</option>
+                  <option>Footwear</option>
+                  <option>Lifestyle</option>
+                  <option>Art & Print</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Style Tags</label>
+                <div class="checkbox-group" id="style-tags">
+                  <label class="checkbox-item" onclick="toggleCheck(this)"
+                    ><input type="checkbox" />Afrocentric</label
+                  >
+                  <label class="checkbox-item" onclick="toggleCheck(this)"
+                    ><input type="checkbox" />Minimalist</label
+                  >
+                  <label class="checkbox-item" onclick="toggleCheck(this)"
+                    ><input type="checkbox" />Bold Graphics</label
+                  >
+                  <label class="checkbox-item" onclick="toggleCheck(this)"
+                    ><input type="checkbox" />Luxury</label
+                  >
+                  <label class="checkbox-item" onclick="toggleCheck(this)"
+                    ><input type="checkbox" />Underground</label
+                  >
+                </div>
+              </div>
+              <div class="form-nav">
+                <span class="step-counter">Step 1 / 3</span>
+                <button class="btn-primary" onclick="goStep(2)">Next →</button>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="form-step" id="step-2">
+              <div class="field-group">
+                <label class="field-label">Designer / Founder Name *</label>
+                <input
+                  class="field-input"
+                  type="text"
+                  id="designer-name"
+                  placeholder="Your full name"
+                />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Instagram Handle</label>
+                <input
+                  class="field-input"
+                  type="text"
+                  id="instagram"
+                  placeholder="@yourbrand"
+                />
+              </div>
+              <div class="field-group">
+                <label class="field-label">Brand Story (short bio)</label>
+                <textarea
+                  class="field-textarea"
+                  id="bio"
+                  placeholder="Tell us about your brand in 2–3 sentences..."
+                ></textarea>
+              </div>
+              <div class="form-nav">
+                <button class="btn-outline" onclick="goStep(1)">← Back</button>
+                <span class="step-counter">Step 2 / 3</span>
+                <button class="btn-primary" onclick="goStep(3)">Next →</button>
+              </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="form-step" id="step-3">
+              <div
+                id="review-summary"
+                style="
+                  margin-bottom: 1.5rem;
+                  font-family: &quot;Space Mono&quot;, monospace;
+                  font-size: 0.65rem;
+                  line-height: 2;
+                  color: var(--muted);
+                  border: 1px solid var(--border);
+                  padding: 1rem;
+                "
+              ></div>
+              <div class="field-group">
+                <label class="field-label">Confirm & Submit</label>
+                <p
+                  style="
+                    font-size: 0.8rem;
+                    color: var(--muted);
+                    line-height: 1.6;
+                  "
+                >
+                  By submitting you agree to the Street Souk vendor terms. Your
+                  data is stored in Supabase and a confirmation email will be
+                  dispatched via Brevo.
+                </p>
+              </div>
+              <div class="form-nav">
+                <button class="btn-outline" onclick="goStep(2)">← Back</button>
+                <span class="step-counter">Step 3 / 3</span>
+                <button
+                  class="btn-primary"
+                  id="submit-btn"
+                  onclick="submitForm()"
+                >
+                  Submit Application
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Supabase confirmation toast -->
+          <div class="supabase-toast" id="supabase-toast">
+            <div class="toast-header">
+              <div class="toast-dot"></div>
+              Supabase — brand_registrations — new row inserted
+            </div>
+            <div class="toast-body" id="toast-body"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FEATURE C: RSVP + BREVO -->
+    <section id="events" style="padding-bottom: 4rem">
+      <div class="section-header">
+        <span class="section-label">// Feature C</span>
+        <h2 class="section-title">Event RSVP</h2>
+        <span class="tech-badge">Brevo + Supabase</span>
+      </div>
+
+      <div class="rsvp-section">
+        <div class="event-card">
+          <div>
+            <div class="event-meta">
+              <div class="event-meta-item">
+                <div class="meta-label">Date</div>
+                <div class="meta-val">14 June 2025</div>
+              </div>
+              <div class="event-meta-item">
+                <div class="meta-label">Location</div>
+                <div class="meta-val">Victoria Island, Lagos</div>
+              </div>
+              <div class="event-meta-item">
+                <div class="meta-label">Format</div>
+                <div class="meta-val">Pop-up + DJ Set</div>
+              </div>
+            </div>
+            <div class="event-name">STREET SOUK<br />LAGOS VII</div>
+            <div class="event-desc">
+              50+ brands. One weekend. The biggest streetwear marketplace in
+              West Africa returns to VI.
+            </div>
+          </div>
+          <div class="rsvp-action">
+            <div class="ticket-counter">
+              <span class="ticket-num" id="ticket-count">127</span>
+              RSVPs confirmed
+            </div>
+            <div
+              style="
+                font-family: &quot;Space Mono&quot;, monospace;
+                font-size: 0.6rem;
+                color: #ff5f56;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+              "
+            >
+              ● Limited capacity
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-form-inline">
+          <div class="rsvp-row">
+            <div class="field-group" style="margin-bottom: 0">
+              <label class="field-label">Full Name</label>
+              <input
+                class="field-input"
+                type="text"
+                id="rsvp-name"
+                placeholder="Your name"
+              />
+            </div>
+            <div class="field-group" style="margin-bottom: 0">
+              <label class="field-label">Email</label>
+              <input
+                class="field-input"
+                type="email"
+                id="rsvp-email"
+                placeholder="your@email.com"
+              />
+            </div>
+            <button
+              class="btn-primary"
+              onclick="submitRSVP()"
+              style="
+                white-space: nowrap;
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+              "
+            >
+              RSVP NOW
+            </button>
+          </div>
+
+          <!-- Brevo log terminal -->
+          <div class="brevo-log" id="brevo-log">
+            <div class="log-line" id="log1">
+              <span class="log-prefix">[API]</span> POST /api/rsvp — received
+            </div>
+            <div class="log-line" id="log2">
+              <span class="log-prefix">[Supabase]</span> Inserting into
+              <span class="log-api">event_rsvps</span>...
+            </div>
+            <div class="log-line" id="log3">
+              <span class="log-prefix">[Supabase]</span>
+              <span class="log-ok">✓ Row inserted</span> — id: rsvp_<span
+                id="rsvp-id"
+                >—</span
+              >
+            </div>
+            <div class="log-line" id="log4">
+              <span class="log-prefix">[Brevo]</span> Triggering transactional
+              email workflow
+              <span class="log-warn">user_rsvp_confirmed</span>...
+            </div>
+            <div class="log-line" id="log5">
+              <span class="log-prefix">[Brevo]</span> Template
+              <span class="log-api">#14</span> dispatched →
+              <span id="rsvp-email-display">—</span>
+            </div>
+            <div class="log-line" id="log6">
+              <span class="log-prefix">[API]</span>
+              <span class="log-ok">200 OK</span> — RSVP confirmed ✓
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="margin-bottom: 0.5rem">
+        <span>STREET SOUK</span> — Demo Prototype v1.0
+      </div>
+      <div>
+        Built with Next.js · Shopify Storefront API · Supabase · Brevo · Framer
+        Motion · Deployed on Vercel
+      </div>
+    </footer>
+
+    <script>
+      // ─── MOCK DATA (simulates Shopify GraphQL response) ──────────────────────
+      const MOCK_PRODUCTS = [
+        {
+          id: "gid://shopify/Product/001",
+          title: "VOID OVERSIZED TEE",
+          brand: "VOID Lagos",
+          tags: ["new-arrival", "exclusive"],
+          price: "₦35,000",
+          status: "new",
+          variants: ["XS", "S", "M", "L", "XL"],
+          color: "#1a1a1a",
+          shape: "tee",
+        },
+        {
+          id: "gid://shopify/Product/002",
+          title: "STREET SOUK HOODIE",
+          brand: "Street Souk Official",
+          tags: ["exclusive"],
+          price: "₦58,000",
+          status: "low",
+          variants: ["S", "M", "L"],
+          color: "#0a0a0a",
+          shape: "hoodie",
+        },
+        {
+          id: "gid://shopify/Product/003",
+          title: "LAGOS DRIP CARGO",
+          brand: "Krown Studios",
+          tags: ["sold-out"],
+          price: "₦45,000",
+          status: "sold",
+          variants: ["28", "30", "32", "34"],
+          color: "#111",
+          shape: "cargo",
+        },
+      ];
+
+      function renderProducts() {
+        const grid = document.getElementById("products-grid");
+        grid.innerHTML = MOCK_PRODUCTS.map((p, i) => {
+          const tagHtml =
+            p.status === "new"
+              ? '<span class="tag-new">New Drop</span>'
+              : p.status === "sold"
+                ? '<span class="tag-sold">Sold Out</span>'
+                : '<span class="tag-new" style="background:#ff9900;color:#000">Low Stock</span>';
+
+          const svgShape =
+            p.shape === "hoodie"
+              ? hoodieSVG()
+              : p.shape === "tee"
+                ? teeSVG()
+                : cargoSVG();
+
+          const variantHtml = p.variants
+            .map(
+              (v, vi) =>
+                `<span class="variant-pill${vi === 0 ? " active" : ""}" onclick="selectVariant(this)">${v}</span>`,
+            )
+            .join("");
+
+          return `
+      <div class="product-card" style="animation-delay:${i * 0.1}s">
+        <div class="product-img">
+          ${tagHtml}
+          <div class="product-placeholder">
+            ${svgShape}
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-brand">${p.brand}</div>
+          <div class="product-name">${p.title}</div>
+          <div class="product-variants">${variantHtml}</div>
+          <div class="product-footer">
+            <div class="price">${p.price}</div>
+            ${
+              p.status !== "sold"
+                ? `<button class="add-btn" onclick="addToCart('${p.id}', this)">Add to Cart</button>`
+                : `<span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#ff5f56;letter-spacing:0.1em">SOLD OUT</span>`
+            }
+          </div>
+        </div>
+      </div>`;
+        }).join("");
+      }
+
+      function hoodieSVG() {
+        return `<svg class="hoodie-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M45 15 C45 8 52 5 60 5 C68 5 75 8 75 15" stroke="#00FF00" stroke-width="2" fill="none"/>
+    <path d="M45 15 L20 40 L10 80 L30 85 L30 135 L90 135 L90 85 L110 80 L100 40 L75 15" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+    <path d="M45 15 C50 25 55 30 60 30 C65 30 70 25 75 15" fill="#111" stroke="#333" stroke-width="1"/>
+    <path d="M30 85 L30 135" stroke="#00FF00" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <path d="M90 85 L90 135" stroke="#00FF00" stroke-width="0.5" stroke-dasharray="4 4"/>
+    <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7" fill="#00FF00" letter-spacing="2">SS</text>
+  </svg>`;
+      }
+
+      function teeSVG() {
+        return `<svg class="hoodie-svg" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M45 10 L20 35 L35 45 L35 120 L85 120 L85 45 L100 35 L75 10 C72 15 65 18 60 18 C55 18 48 15 45 10Z" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+    <path d="M45 10 C50 18 55 20 60 20 C65 20 70 18 75 10" fill="none" stroke="#444" stroke-width="1"/>
+    <text x="60" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#00FF00" letter-spacing="3">VOID</text>
+    <path d="M40 90 L80 90" stroke="#00FF00" stroke-width="0.5"/>
+  </svg>`;
+      }
+
+      function cargoSVG() {
+        return `<svg class="hoodie-svg" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M30 5 L90 5 L95 75 L75 80 L75 145 L60 145 L60 80" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+    <path d="M60 80 L45 80 L45 145 L60 145" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
+    <path d="M25 75 L45 80" stroke="#333" stroke-width="1.5"/>
+    <rect x="32" y="30" width="20" height="22" rx="2" fill="none" stroke="#00FF00" stroke-width="1"/>
+    <rect x="68" y="30" width="20" height="22" rx="2" fill="none" stroke="#00FF00" stroke-width="1"/>
+    <line x1="30" y1="5" x2="25" y2="75" stroke="#333" stroke-width="1.5"/>
+    <line x1="90" y1="5" x2="95" y2="75" stroke="#333" stroke-width="1.5"/>
+  </svg>`;
+      }
+
+      function selectVariant(el) {
+        el.closest(".product-variants")
+          .querySelectorAll(".variant-pill")
+          .forEach((v) => v.classList.remove("active"));
+        el.classList.add("active");
+      }
+
+      function addToCart(id, btn) {
+        btn.textContent = "✓ Added";
+        btn.style.background = "var(--neon)";
+        btn.style.color = "var(--black)";
+        btn.disabled = true;
+      }
+
+      function togglePanel(header) {
+        const body = header.nextElementSibling;
+        const arrow = header.querySelector("span:last-child");
+        body.classList.toggle("open");
+        arrow.textContent = body.classList.contains("open")
+          ? "▲ collapse"
+          : "▼ expand";
+      }
+
+      // ─── MULTI-STEP FORM ──────────────────────────────────────────────────────
+      let currentStep = 1;
+
+      function goStep(n) {
+        document
+          .querySelectorAll(".form-step")
+          .forEach((s) => s.classList.remove("active"));
+        document
+          .querySelectorAll(".step-tab")
+          .forEach((t) => t.classList.remove("active"));
+        document.getElementById("step-" + n).classList.add("active");
+        document
+          .querySelector(`.step-tab[data-step="${n}"]`)
+          .classList.add("active");
+        currentStep = n;
+
+        if (n === 3) {
+          const bn =
+            document.getElementById("brand-name").value || "VOID Lagos";
+          const dn = document.getElementById("designer-name").value || "—";
+          const cat = document.getElementById("category").value || "—";
+          const ig = document.getElementById("instagram").value || "—";
+          document.getElementById("review-summary").innerHTML =
+            `<span style="color:var(--neon)">brand_name</span>: ${bn}<br>` +
+            `<span style="color:var(--neon)">designer</span>: ${dn}<br>` +
+            `<span style="color:var(--neon)">category</span>: ${cat}<br>` +
+            `<span style="color:var(--neon)">instagram</span>: ${ig}`;
+        }
+      }
+
+      function toggleCheck(el) {
+        el.classList.toggle("checked");
+      }
+
+      function submitForm() {
+        const btn = document.getElementById("submit-btn");
+        btn.textContent = "Inserting...";
+        btn.disabled = true;
+
+        setTimeout(() => {
+          const bn =
+            document.getElementById("brand-name").value || "VOID Lagos";
+          const dn =
+            document.getElementById("designer-name").value || "Demo User";
+          const cat = document.getElementById("category").value || "Streetwear";
+          const ig = document.getElementById("instagram").value || "@voiddemo";
+          const ts = new Date().toISOString();
+          const rid = "br_" + Math.random().toString(36).substr(2, 8);
+
+          const toast = document.getElementById("supabase-toast");
+          document.getElementById("toast-body").innerHTML =
+            `<span class="toast-key">id</span>: ${rid}<br>` +
+            `<span class="toast-key">brand_name</span>: <span class="toast-row">"${bn}"</span><br>` +
+            `<span class="toast-key">designer_name</span>: <span class="toast-row">"${dn}"</span><br>` +
+            `<span class="toast-key">category</span>: <span class="toast-row">"${cat}"</span><br>` +
+            `<span class="toast-key">instagram</span>: <span class="toast-row">"${ig}"</span><br>` +
+            `<span class="toast-key">created_at</span>: <span class="toast-row">"${ts}"</span>`;
+
+          toast.style.display = "block";
+          btn.textContent = "✓ Application Submitted";
+          btn.style.opacity = "0.5";
+        }, 900);
+      }
+
+      // ─── RSVP + BREVO LOG ─────────────────────────────────────────────────────
+      function submitRSVP() {
+        const name = document.getElementById("rsvp-name").value || "Demo User";
+        const email =
+          document.getElementById("rsvp-email").value || "demo@streetsouk.com";
+
+        const log = document.getElementById("brevo-log");
+        log.style.display = "block";
+
+        const lines = ["log1", "log2", "log3", "log4", "log5", "log6"];
+        lines.forEach((l) =>
+          document.getElementById(l).classList.remove("active"),
+        );
+
+        document.getElementById("rsvp-id").textContent =
+          "rsvp_" + Math.random().toString(36).substr(2, 8);
+        document.getElementById("rsvp-email-display").textContent = email;
+
+        lines.forEach((id, i) => {
+          setTimeout(() => {
+            if (i > 0)
+              document.getElementById(lines[i - 1]).classList.remove("active");
+            document.getElementById(id).classList.add("active");
+            if (i === 5) {
+              const count = document.getElementById("ticket-count");
+              count.textContent = parseInt(count.textContent) + 1;
+            }
+          }, i * 500);
+        });
+      }
+
+      // Init
+      renderProducts();
+    </script>
+  </body>
+</html>
