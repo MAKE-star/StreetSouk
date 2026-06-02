@@ -1,1506 +1,770 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>STREET SOUK — Drop Portal</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --neon: #00ff00;
-        --neon-dim: #00cc00;
-        --neon-glow: rgba(0, 255, 0, 0.15);
-        --black: #030303;
-        --surface: #0d0d0d;
-        --surface2: #141414;
-        --border: rgba(0, 255, 0, 0.2);
-        --text: #e8e8e8;
-        --muted: #888;
-      }
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        background: var(--black);
-        color: var(--text);
-        font-family: "DM Sans", sans-serif;
-        overflow-x: hidden;
-      }
-      /* NAV */
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 1rem 2rem;
-        background: rgba(3, 3, 3, 0.9);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border);
-      }
-      .logo {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 2rem;
-        color: var(--neon);
-        letter-spacing: 0.05em;
-        text-decoration: none;
-      }
-      .nav-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-      }
-      .nav-links a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 0.8rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        font-family: "Space Mono", monospace;
-        transition: color 0.2s;
-      }
-      .nav-links a:hover {
-        color: var(--neon);
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STREET SOUK</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--neon:#00FF00;--ndim:#00cc00;--nglow:rgba(0,255,0,.15);--black:#030303;--s1:#0d0d0d;--s2:#141414;--border:rgba(0,255,0,.2);--text:#e8e8e8;--muted:#888}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 
-      /* HERO */
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 6rem 2rem 4rem;
-        position: relative;
-        overflow: hidden;
-      }
-      .hero::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-          ellipse 60% 40% at 50% 60%,
-          rgba(0, 255, 0, 0.07) 0%,
-          transparent 70%
-        );
-        pointer-events: none;
-      }
-      .hero-tag {
-        font-family: "Space Mono", monospace;
-        font-size: 0.7rem;
-        letter-spacing: 0.3em;
-        color: var(--neon);
-        text-transform: uppercase;
-        margin-bottom: 1.5rem;
-        border: 1px solid var(--border);
-        padding: 0.4rem 1rem;
-        display: inline-block;
-      }
-      .hero h1 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(4rem, 12vw, 10rem);
-        line-height: 0.9;
-        color: var(--text);
-        letter-spacing: 0.02em;
-        margin-bottom: 1.5rem;
-      }
-      .hero h1 span {
-        color: var(--neon);
-      }
-      .hero-sub {
-        font-size: 1rem;
-        color: var(--muted);
-        max-width: 480px;
-        line-height: 1.7;
-        margin-bottom: 3rem;
-      }
-      .btn-primary {
-        background: var(--neon);
-        color: var(--black);
-        border: none;
-        padding: 1rem 2.5rem;
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.2rem;
-        letter-spacing: 0.1em;
-        cursor: pointer;
-        transition: all 0.2s;
-        text-decoration: none;
-        display: inline-block;
-      }
-      .btn-primary:hover {
-        background: #fff;
-        transform: translateY(-2px);
-      }
-      .btn-outline {
-        background: transparent;
-        color: var(--neon);
-        border: 1px solid var(--neon);
-        padding: 0.8rem 2rem;
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.1rem;
-        letter-spacing: 0.1em;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .btn-outline:hover {
-        background: var(--neon-glow);
-      }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(3,3,3,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-top{display:flex;align-items:center;justify-content:space-between;padding:.85rem 2.5rem}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--neon);letter-spacing:.05em;text-decoration:none;cursor:pointer}
+.nav-icons{display:flex;gap:1.2rem;align-items:center}
+.nav-icon{color:var(--text);cursor:pointer;font-size:1.1rem;background:none;border:none;position:relative}
+.cart-bubble{position:absolute;top:-6px;right:-6px;background:var(--neon);color:var(--black);font-size:.5rem;font-family:'Space Mono',monospace;font-weight:700;width:14px;height:14px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.nav-bar{background:var(--neon);display:flex;padding:0 2.5rem;overflow-x:auto}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-bar a{color:var(--black);text-decoration:none;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.55rem 1.2rem;white-space:nowrap;border-right:1px solid rgba(0,0,0,.15);transition:background .15s;cursor:pointer}
+.nav-bar a:first-child{border-left:1px solid rgba(0,0,0,.15)}
+.nav-bar a:hover,.nav-bar a.active{background:rgba(0,0,0,.14)}
 
-      .scroll-indicator {
-        position: absolute;
-        bottom: 2rem;
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.2em;
-        color: var(--muted);
-        text-transform: uppercase;
-        animation: bounce 2s infinite;
-      }
-      @keyframes bounce {
-        0%,
-        100% {
-          transform: translateY(0);
-        }
-        50% {
-          transform: translateY(8px);
-        }
-      }
+/* VIEWS */
+.view{display:none}
+.view.active{display:block}
 
-      /* SECTIONS */
-      section {
-        padding: 6rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-      .section-header {
-        display: flex;
-        align-items: baseline;
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid var(--border);
-      }
-      .section-label {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.25em;
-        color: var(--neon);
-        text-transform: uppercase;
-        white-space: nowrap;
-      }
-      .section-title {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        letter-spacing: 0.05em;
-        color: var(--text);
-        line-height: 1;
-      }
-      .tech-badge {
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        color: var(--black);
-        background: var(--neon);
-        padding: 0.2rem 0.5rem;
-        text-transform: uppercase;
-        font-weight: 700;
-      }
+/* ── HERO with IMAGE CAROUSEL ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden}
 
-      /* PRODUCTS */
-      .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.5rem;
-      }
-      .product-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        overflow: hidden;
-        transition:
-          border-color 0.3s,
-          transform 0.3s;
-        animation: fadeUp 0.6s ease both;
-      }
-      .product-card:hover {
-        border-color: var(--neon);
-        transform: translateY(-4px);
-      }
-      @keyframes fadeUp {
-        from {
-          opacity: 0;
-          transform: translateY(24px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .product-card:nth-child(2) {
-        animation-delay: 0.1s;
-      }
-      .product-card:nth-child(3) {
-        animation-delay: 0.2s;
-      }
-      .product-img {
-        width: 100%;
-        aspect-ratio: 3/4;
-        background: var(--surface2);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        overflow: hidden;
-      }
-      .product-placeholder {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-      }
-      .hoodie-svg {
-        width: 120px;
-        opacity: 0.8;
-      }
-      .product-tag {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .tag-new {
-        background: var(--neon);
-        color: var(--black);
-        padding: 0.2rem 0.6rem;
-        font-weight: 700;
-      }
-      .tag-sold {
-        background: #ff3333;
-        color: #fff;
-        padding: 0.2rem 0.6rem;
-        font-weight: 700;
-      }
-      .product-info {
-        padding: 1.25rem;
-      }
-      .product-brand {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        color: var(--neon);
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        margin-bottom: 0.4rem;
-      }
-      .product-name {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.5rem;
-        letter-spacing: 0.05em;
-        margin-bottom: 0.5rem;
-      }
-      .product-variants {
-        display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-      }
-      .variant-pill {
-        font-family: "Space Mono", monospace;
-        font-size: 0.55rem;
-        letter-spacing: 0.1em;
-        border: 1px solid var(--border);
-        padding: 0.2rem 0.5rem;
-        color: var(--muted);
-        cursor: pointer;
-        transition: all 0.2s;
-        text-transform: uppercase;
-      }
-      .variant-pill:hover,
-      .variant-pill.active {
-        border-color: var(--neon);
-        color: var(--neon);
-      }
-      .product-footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-top: 1rem;
-        border-top: 1px solid var(--border);
-      }
-      .price {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 1.5rem;
-        color: var(--neon);
-      }
-      .add-btn {
-        background: transparent;
-        border: 1px solid var(--neon);
-        color: var(--neon);
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .add-btn:hover {
-        background: var(--neon);
-        color: var(--black);
-      }
+.bg-carousel{position:absolute;inset:0;z-index:0}
+.bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;background-size:cover;background-position:center;background-repeat:no-repeat}
+.bg-slide.active{opacity:1}
 
-      /* GRAPHQL PANEL */
-      .graphql-panel {
-        margin-top: 2rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        overflow: hidden;
-      }
-      .panel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0.8rem 1.25rem;
-        background: var(--surface2);
-        border-bottom: 1px solid var(--border);
-        cursor: pointer;
-      }
-      .panel-header-left {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-      }
-      .dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-      }
-      .dot-r {
-        background: #ff5f56;
-      }
-      .dot-y {
-        background: #ffbd2e;
-      }
-      .dot-g {
-        background: var(--neon);
-      }
-      .panel-title {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        color: var(--muted);
-        letter-spacing: 0.1em;
-      }
-      .panel-body {
-        padding: 1.25rem;
-        display: none;
-      }
-      .panel-body.open {
-        display: block;
-      }
-      pre {
-        font-family: "Space Mono", monospace;
-        font-size: 0.7rem;
-        line-height: 1.7;
-        color: #ccc;
-        white-space: pre-wrap;
-      }
-      .kw {
-        color: #ff79c6;
-      }
-      .str {
-        color: var(--neon);
-      }
-      .type {
-        color: #8be9fd;
-      }
-      .field {
-        color: #f8f8f2;
-      }
-      .cmt {
-        color: #555;
-      }
+/* Dark overlay for readability */
+.bg-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,3,3,.55) 0%,rgba(3,3,3,.4) 50%,rgba(3,3,3,.75) 100%);z-index:1}
 
-      /* REGISTRATION FORM */
-      .form-wrapper {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        align-items: start;
-      }
-      @media (max-width: 768px) {
-        .form-wrapper {
-          grid-template-columns: 1fr;
-        }
-      }
-      .form-description {
-        padding-top: 1rem;
-      }
-      .form-description h3 {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 2.5rem;
-        letter-spacing: 0.05em;
-        margin-bottom: 1rem;
-        line-height: 1;
-      }
-      .form-description h3 span {
-        color: var(--neon);
-      }
-      .form-description p {
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
-      }
-      .form-stat {
-        display: flex;
-        gap: 2rem;
-      }
-      .stat {
-      }
-      .stat-num {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 2.5rem;
-        color: var(--neon);
-        line-height: 1;
-      }
-      .stat-label {
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-      }
-      .reg-form {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        padding: 2rem;
-      }
-      .form-steps {
-        display: flex;
-        gap: 0;
-        margin-bottom: 2rem;
-      }
-      .step-tab {
-        flex: 1;
-        text-align: center;
-        padding: 0.6rem;
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--muted);
-        border-bottom: 2px solid var(--border);
-        cursor: pointer;
-        transition: all 0.2s;
-      }
-      .step-tab.active {
-        color: var(--neon);
-        border-bottom-color: var(--neon);
-      }
-      .form-step {
-        display: none;
-      }
-      .form-step.active {
-        display: block;
-        animation: fadeIn 0.3s ease;
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateX(8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .field-group {
-        margin-bottom: 1.25rem;
-      }
-      .field-label {
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        color: var(--muted);
-        display: block;
-        margin-bottom: 0.4rem;
-      }
-      .field-input,
-      .field-select,
-      .field-textarea {
-        width: 100%;
-        background: var(--surface2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        padding: 0.8rem 1rem;
-        font-family: "DM Sans", sans-serif;
-        font-size: 0.9rem;
-        outline: none;
-        transition: border-color 0.2s;
-        appearance: none;
-      }
-      .field-input:focus,
-      .field-select:focus,
-      .field-textarea:focus {
-        border-color: var(--neon);
-      }
-      .field-textarea {
-        resize: vertical;
-        min-height: 80px;
-      }
-      .field-select {
-        cursor: pointer;
-      }
-      .checkbox-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-      }
-      .checkbox-item {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-        border: 1px solid var(--border);
-        padding: 0.4rem 0.8rem;
-        transition: all 0.2s;
-        font-size: 0.8rem;
-        color: var(--muted);
-      }
-      .checkbox-item.checked {
-        border-color: var(--neon);
-        color: var(--neon);
-      }
-      .checkbox-item input {
-        display: none;
-      }
-      .form-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 1.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--border);
-      }
-      .step-counter {
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        color: var(--muted);
-        letter-spacing: 0.1em;
-      }
-      .supabase-toast {
-        display: none;
-        background: var(--surface2);
-        border: 1px solid var(--neon);
-        padding: 1rem 1.25rem;
-        margin-top: 1rem;
-        animation: slideIn 0.3s ease;
-      }
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(-8px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .toast-header {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        color: var(--neon);
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-      }
-      .toast-dot {
-        width: 6px;
-        height: 6px;
-        background: var(--neon);
-        border-radius: 50%;
-        animation: pulse 1s infinite;
-      }
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0.3;
-        }
-      }
-      .toast-body {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        color: var(--muted);
-        line-height: 1.6;
-      }
-      .toast-row {
-        color: var(--text);
-      }
-      .toast-key {
-        color: var(--neon);
-      }
+/* Hero content */
+.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
+.hero-tag{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.3em;color:var(--neon);text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(0,255,0,.5);padding:.4rem 1rem;display:inline-block;background:rgba(0,0,0,.5);backdrop-filter:blur(6px)}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,8.5rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.2rem;text-shadow:0 2px 40px rgba(0,0,0,.9)}
+.hero h1 span{color:var(--neon)}
+.hero-sub{font-size:1rem;color:rgba(232,232,232,.9);max-width:520px;line-height:1.7;margin-bottom:2rem;text-shadow:0 1px 16px rgba(0,0,0,.95)}
+.btn-primary{background:var(--neon);color:var(--black);border:none;padding:1rem 2.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-block}
+.btn-primary:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--neon);border:1px solid var(--neon);padding:.8rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.1em;cursor:pointer;transition:all .2s}
+.btn-outline:hover{background:var(--nglow)}
 
-      /* RSVP */
-      .rsvp-section {
-        background: var(--surface);
-        border: 1px solid var(--border);
-      }
-      .event-card {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 2rem;
-        padding: 2.5rem;
-        border-bottom: 1px solid var(--border);
-        align-items: center;
-      }
-      @media (max-width: 640px) {
-        .event-card {
-          grid-template-columns: 1fr;
-        }
-      }
-      .event-meta {
-        display: flex;
-        gap: 2rem;
-        flex-wrap: wrap;
-        margin-bottom: 1rem;
-      }
-      .event-meta-item {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-      }
-      .meta-label {
-        color: var(--muted);
-        margin-bottom: 0.2rem;
-      }
-      .meta-val {
-        color: var(--neon);
-      }
-      .event-name {
-        font-family: "Bebas Neue", sans-serif;
-        font-size: 2.5rem;
-        letter-spacing: 0.05em;
-        line-height: 1;
-        margin-bottom: 0.75rem;
-      }
-      .event-desc {
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.6;
-      }
-      .rsvp-action {
-        text-align: center;
-      }
-      .ticket-counter {
-        font-family: "Space Mono", monospace;
-        font-size: 0.6rem;
-        letter-spacing: 0.1em;
-        color: var(--muted);
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-      }
-      .ticket-num {
-        color: var(--neon);
-        font-size: 1.5rem;
-        font-family: "Bebas Neue", sans-serif;
-        display: block;
-      }
-      .rsvp-form-inline {
-        padding: 2rem 2.5rem;
-      }
-      .rsvp-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr auto;
-        gap: 1rem;
-        align-items: end;
-      }
-      @media (max-width: 640px) {
-        .rsvp-row {
-          grid-template-columns: 1fr;
-        }
-      }
-      .brevo-log {
-        display: none;
-        margin-top: 1.5rem;
-        background: #000;
-        border: 1px solid var(--border);
-        padding: 1rem 1.25rem;
-        animation: fadeIn 0.3s ease;
-      }
-      .log-line {
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        line-height: 2;
-        color: #555;
-      }
-      .log-line.active {
-        color: var(--neon);
-      }
-      .log-line.done {
-        color: #555;
-      }
-      .log-prefix {
-        color: #333;
-      }
-      .log-api {
-        color: #8be9fd;
-      }
-      .log-ok {
-        color: var(--neon);
-      }
-      .log-warn {
-        color: #f1fa8c;
-      }
+/* Slide indicator dots */
+.hero-dots{position:relative;z-index:2;display:flex;gap:.5rem;margin-top:2.5rem}
+.hdot{width:28px;height:3px;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
+.hdot.active{background:var(--neon);width:48px}
 
-      /* FOOTER */
-      footer {
-        border-top: 1px solid var(--border);
-        padding: 2rem;
-        text-align: center;
-        font-family: "Space Mono", monospace;
-        font-size: 0.65rem;
-        letter-spacing: 0.1em;
-        color: var(--muted);
-        text-transform: uppercase;
-      }
-      footer span {
-        color: var(--neon);
-      }
+/* Slide counter */
+.slide-counter{position:absolute;bottom:2rem;right:2.5rem;z-index:2;font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.6);letter-spacing:.2em}
+.slide-counter span{color:var(--neon)}
 
-      /* SECTION DIVIDER */
-      .divider {
-        width: 100%;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          var(--neon),
-          transparent
-        );
-        opacity: 0.3;
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <nav>
-      <a class="logo" href="#">STREET SOUK</a>
-      <ul class="nav-links">
-        <li><a href="#drops">Drops</a></li>
-        <li><a href="#register">Register</a></li>
-        <li><a href="#events">Events</a></li>
-      </ul>
-    </nav>
+/* STORE */
+.store-wrap{padding:7.5rem 2.5rem 4rem;max-width:1400px;margin:0 auto}
+.breadcrumb{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1.8rem;display:flex;align-items:center;gap:.5rem}
+.breadcrumb span.neon{color:var(--neon)}
+.breadcrumb a{color:var(--muted);text-decoration:none;cursor:pointer}
+.breadcrumb a:hover{color:var(--neon)}
+.col-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.col-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.05em}
+.col-meta{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
 
-    <!-- HERO -->
-    <div class="hero">
-      <span class="hero-tag">Next Drop — Lagos · 14 June 2025</span>
-      <h1>HYPE<br /><span>DROP</span><br />PORTAL</h1>
-      <p class="hero-sub">
-        Africa's premier streetwear marketplace. Register your brand, cop the
-        latest drops, and RSVP for the next pop-up.
-      </p>
-      <a href="#drops" class="btn-primary">View Current Drop</a>
-      <div class="scroll-indicator">↓ scroll</div>
+/* GRID */
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+@media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:768px){.product-grid{grid-template-columns:repeat(2,1fr)}}
+.product-card{border:1px solid transparent;cursor:pointer;transition:border-color .25s;position:relative;background:var(--black);animation:fadeUp .5s ease both}
+.product-card:hover{border-color:var(--neon)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.pimg{position:relative;width:100%;aspect-ratio:1/1;background:var(--s1);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.pimg .mock{width:60%;height:60%;display:flex;align-items:center;justify-content:center}
+.pimg svg{transition:transform .4s ease}
+.product-card:hover .pimg svg{transform:scale(1.06)}
+.ss-badge{position:absolute;top:10px;left:10px;background:var(--neon);color:var(--black);font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .5rem}
+.sold-badge{position:absolute;top:10px;right:10px;background:#ff5f56;color:#fff;font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .5rem}
+.pinfo{padding:.9rem .75rem 1.1rem}
+.p-brand{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.3rem}
+.p-title{font-size:.88rem;font-weight:500;color:var(--text);margin-bottom:.4rem;line-height:1.3}
+.p-price{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--neon);letter-spacing:.05em}
+.p-price.out{color:var(--muted);text-decoration:line-through}
+
+/* HOME SECTIONS */
+.home-section{padding:4.5rem 2.5rem;max-width:1400px;margin:0 auto}
+.home-sec-hdr{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.home-sec-title{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em}
+.view-all{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--neon);text-decoration:none;cursor:pointer;display:flex;align-items:center;gap:.4rem;transition:gap .2s}
+.view-all:hover{gap:.9rem}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:2rem 1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--black);border:1px solid var(--border);width:100%;max-width:960px;margin:auto;animation:mIn .3s ease;position:relative}
+@keyframes mIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.modal-close{position:absolute;top:1rem;right:1rem;z-index:10;background:var(--s2);border:1px solid var(--border);color:var(--text);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;transition:all .2s}
+.modal-close:hover{background:var(--neon);color:var(--black)}
+.modal-crumb{padding:1rem 1.5rem 0;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;gap:.5rem;align-items:center}
+.modal-crumb span.neon{color:var(--neon)}
+.modal-crumb a{color:var(--muted);cursor:pointer;text-decoration:none}
+.modal-crumb a:hover{color:var(--neon)}
+.modal-body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media(max-width:640px){.modal-body{grid-template-columns:1fr}}
+.modal-gallery{padding:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.modal-main{width:100%;aspect-ratio:1/1;background:var(--s1);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.modal-main .mock-lg{width:65%;display:flex;align-items:center;justify-content:center}
+.modal-thumbs{display:flex;gap:.5rem}
+.thumb{width:70px;height:70px;flex-shrink:0;background:var(--s2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:border-color .2s;overflow:hidden}
+.thumb.active,.thumb:hover{border-color:var(--neon)}
+.thumb svg{width:50%;height:50%}
+.modal-info{padding:2rem 2rem 2rem 1.5rem;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:1.2rem}
+.modal-badges{display:flex;gap:.5rem}
+.mbadge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .6rem}
+.mbadge.excl{background:var(--neon);color:var(--black);font-weight:700}
+.mbadge.brand{border:1px solid var(--border);color:var(--muted)}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;color:var(--neon)}
+.modal-brand{font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.modal-price{font-family:'Space Mono',monospace;font-size:1.25rem;color:var(--text);letter-spacing:.05em;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.size-lbl{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;display:block}
+.size-row{display:flex;flex-wrap:wrap;gap:.5rem}
+.size-btn{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:.5rem .9rem;cursor:pointer;transition:all .2s}
+.size-btn:hover,.size-btn.active{border-color:var(--neon);color:var(--neon)}
+.bag-btn{background:var(--neon);color:var(--black);border:none;padding:1.1rem;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.15em;cursor:pointer;transition:all .2s;width:100%}
+.bag-btn:hover{background:#fff}
+.bag-btn:disabled{background:var(--muted);cursor:not-allowed}
+.bag-confirm{display:none;background:var(--neon);color:var(--black);padding:.75rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;animation:fadeIn .3s ease;margin-top:.5rem}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.acc-item{border-top:1px solid var(--border)}
+.acc-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:.85rem 0;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:.88rem;cursor:pointer;text-align:left}
+.acc-trigger:hover{color:var(--neon)}
+.acc-icon{color:var(--neon);font-size:1.1rem;line-height:1}
+.acc-body{display:none;padding-bottom:1rem;color:var(--muted);font-size:.84rem;line-height:1.7}
+.acc-body.open{display:block}
+
+/* COMMUNITY */
+.community-wrap{padding:7rem 2.5rem 5rem;max-width:1200px;margin:0 auto}
+.community-hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid var(--border)}
+@media(max-width:768px){.community-hero{grid-template-columns:1fr}}
+.comm-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:.95;letter-spacing:.03em;margin-bottom:1.5rem}
+.comm-headline span{color:var(--neon)}
+.comm-body{color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:2rem}
+.comm-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem}
+.cstat{border-left:2px solid var(--neon);padding-left:1rem}
+.cstat-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--neon);line-height:1}
+.cstat-lbl{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:.2rem}
+.reg-panel{background:var(--s1);border:1px solid var(--border)}
+.reg-panel-hdr{padding:1.5rem 2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.reg-panel-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em}
+.reg-panel-tag{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--black);background:var(--neon);padding:.25rem .6rem;font-weight:700}
+.reg-panel-body{padding:2rem}
+.form-steps{display:flex;margin-bottom:2rem;border-bottom:1px solid var(--border)}
+.step-tab{flex:1;text-align:center;padding:.7rem;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .2s}
+.step-tab.active{color:var(--neon);border-bottom-color:var(--neon)}
+.fstep{display:none}
+.fstep.active{display:block;animation:fadeIn .3s ease}
+.fg{margin-bottom:1.2rem}
+.flbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.45rem}
+.finput,.fselect,.ftarea{width:100%;background:var(--s2);border:1px solid var(--border);color:var(--text);padding:.8rem 1rem;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;transition:border-color .2s;appearance:none}
+.finput:focus,.fselect:focus,.ftarea:focus{border-color:var(--neon)}
+.ftarea{resize:vertical;min-height:90px}
+.form-row-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row-2{grid-template-columns:1fr}}
+.chk-group{display:flex;flex-wrap:wrap;gap:.5rem}
+.chk-item{display:flex;align-items:center;gap:.5rem;cursor:pointer;border:1px solid var(--border);padding:.4rem .8rem;transition:all .2s;font-size:.8rem;color:var(--muted)}
+.chk-item.checked{border-color:var(--neon);color:var(--neon)}
+.chk-item input{display:none}
+.fnav{display:flex;justify-content:space-between;align-items:center;margin-top:1.8rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.sctr{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.1em}
+.sb-toast{display:none;background:var(--s2);border:1px solid var(--neon);padding:1rem 1.2rem;margin-top:1rem;animation:fadeIn .3s ease}
+.toast-hdr{display:flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--neon);letter-spacing:.1em;text-transform:uppercase;margin-bottom:.5rem}
+.toast-dot{width:6px;height:6px;background:var(--neon);border-radius:50%;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.toast-bdy{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);line-height:1.6}
+.trow{color:var(--text)}.tkey{color:var(--neon)}
+.code-panel{background:var(--s1);border:1px solid var(--border);overflow:hidden;margin-top:1.5rem}
+.cpanel-hdr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.2rem;background:var(--s2);border-bottom:1px solid var(--border);cursor:pointer}
+.cpanel-left{display:flex;align-items:center;gap:.7rem}
+.dot{width:8px;height:8px;border-radius:50%}
+.dr{background:#ff5f56}.dy{background:#ffbd2e}.dg{background:var(--neon)}
+.cpanel-title{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);letter-spacing:.1em}
+.cpanel-body{padding:1.2rem;display:none}
+.cpanel-body.open{display:block}
+pre{font-family:'Space Mono',monospace;font-size:.68rem;line-height:1.7;color:#ccc;white-space:pre-wrap}
+.kw{color:#ff79c6}.str{color:var(--neon)}.tp{color:#8be9fd}.fd{color:#f8f8f2}.cm{color:#555}
+.rsvp-section{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--border)}
+.rsvp-section-hdr{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:2.5rem}
+.rsvp-sec-label{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.25em;color:var(--neon);text-transform:uppercase;white-space:nowrap}
+.rsvp-sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.05em;line-height:1}
+.tech-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:var(--black);background:var(--neon);padding:.2rem .5rem;text-transform:uppercase;font-weight:700}
+.rsvp-layout{display:grid;grid-template-columns:1fr 1.2fr;gap:3rem;align-items:start}
+@media(max-width:768px){.rsvp-layout{grid-template-columns:1fr}}
+.rsvp-box{background:var(--s1);border:1px solid var(--border)}
+.evt-card{padding:2rem;border-bottom:1px solid var(--border)}
+.evt-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+.emi{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase}
+.emlbl{color:var(--muted);margin-bottom:.2rem}
+.emval{color:var(--neon)}
+.evt-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.05em;line-height:1;margin-bottom:.75rem}
+.evt-desc{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:1.5rem}
+.evt-counter{display:flex;align-items:center;gap:1.5rem}
+.tnum{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--neon);line-height:1}
+.tctr-lbl{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.cap-warn{font-family:'Space Mono',monospace;font-size:.58rem;color:#ff5f56;letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
+.rsvp-form{padding:2rem}
+.rsvp-fields{display:flex;flex-direction:column;gap:1rem;margin-bottom:1.2rem}
+.brevo-log{display:none;margin-top:1.2rem;background:#000;border:1px solid var(--border);padding:1rem 1.2rem;animation:fadeIn .3s ease}
+.ll{font-family:'Space Mono',monospace;font-size:.63rem;line-height:2;color:#555}
+.ll.active{color:var(--neon)}
+.lp{color:#333}.la{color:#8be9fd}.lok{color:var(--neon)}.lw{color:#f1fa8c}
+.rsvp-info-panel{display:flex;flex-direction:column;gap:1.5rem}
+.rsvp-info-card{background:var(--s1);border:1px solid var(--border);padding:1.5rem}
+.ric-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--neon);margin-bottom:.75rem}
+.ric-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.05em;margin-bottom:.5rem}
+.ric-body{font-size:.85rem;color:var(--muted);line-height:1.6}
+.ric-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.75rem}
+.ric-tag{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);padding:.25rem .6rem;color:var(--muted)}
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.22}
+footer{border-top:1px solid var(--border)}
+.foot-top{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding:3rem 2.5rem}
+@media(max-width:768px){.foot-top{grid-template-columns:1fr 1fr}}
+.foot-brand{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--neon);margin-bottom:.5rem}
+.foot-tag{color:var(--muted);font-size:.8rem;line-height:1.6;margin-bottom:1rem}
+.foot-col-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text);margin-bottom:1rem}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.foot-links a{color:var(--muted);text-decoration:none;font-size:.84rem;transition:color .2s;cursor:pointer}
+.foot-links a:hover{color:var(--neon)}
+.foot-email-row{display:flex}
+.foot-email{flex:1;background:var(--s2);border:1px solid var(--border);border-right:none;color:var(--text);padding:.65rem 1rem;font-size:.84rem;outline:none;font-family:'DM Sans',sans-serif}
+.foot-email:focus{border-color:var(--neon)}
+.foot-submit{background:var(--neon);color:var(--black);border:none;padding:.65rem 1rem;font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.foot-bottom{padding:1.1rem 2.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.foot-copy{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-top">
+    <a class="logo" onclick="showView('home')">STREET SOUK</a>
+    <div class="nav-icons">
+      <button class="nav-icon" onclick="showView('store')">&#128269;</button>
+      <button class="nav-icon" style="position:relative" onclick="showView('store')">
+        &#128717;<span class="cart-bubble" id="cart-count">0</span>
+      </button>
+      <span style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted)">&#127475;&#127468; NG</span>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <a id="nav-discover" onclick="showView('home')">DISCOVER</a>
+    <a id="nav-store" onclick="showView('store')">STORE</a>
+    <a id="nav-community" onclick="showView('community')">COMMUNITY</a>
+    <a id="nav-rsvp" onclick="showView('community');setTimeout(()=>document.getElementById('rsvp-anchor').scrollIntoView({behavior:'smooth'}),120)">RSVP</a>
+  </div>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div class="view active" id="view-home">
+  <div class="hero">
+    <!-- IMAGE BG CAROUSEL -->
+    <div class="bg-carousel" id="bg-carousel"></div>
+    <div class="bg-overlay"></div>
+
+    <!-- TEXT CONTENT -->
+    <div class="hero-content">
+      <span class="hero-tag">Street Souk Uni Tour &#x2019;26 &mdash; Live Now</span>
+      <h1>AFRICA&#x27;S<br><span>BIGGEST</span><br>STREETWEAR</h1>
+      <p class="hero-sub">Community. Convention. Culture. Shop exclusive drops, register your brand, and RSVP for the next pop-up.</p>
+      <a class="btn-primary" onclick="showView('store')">Shop the Drop</a>
+      <div class="hero-dots" id="hero-dots"></div>
     </div>
 
-    <div class="divider"></div>
+    <div class="slide-counter"><span id="slide-cur">01</span> / <span id="slide-tot">06</span></div>
+  </div>
 
-    <!-- FEATURE A: SHOPIFY GRAPHQL MOCK STOREFRONT -->
-    <section id="drops">
-      <div class="section-header">
-        <span class="section-label">Feature A</span>
-        <h2 class="section-title">Current Drop</h2>
-        <span class="tech-badge">Shopify GraphQL</span>
+  <div class="home-section">
+    <div class="home-sec-hdr">
+      <h2 class="home-sec-title">SS EXCLUSIVES</h2>
+      <a class="view-all" onclick="showCollection('exclusives')">View All Exclusives &#8594;</a>
+    </div>
+    <div class="product-grid" id="home-excl-grid"></div>
+  </div>
+  <div class="divider"></div>
+  <div class="home-section">
+    <div class="home-sec-hdr">
+      <h2 class="home-sec-title">NEW ARRIVALS</h2>
+      <a class="view-all" onclick="showCollection('new-arrivals')">View All &#8594;</a>
+    </div>
+    <div class="product-grid" id="home-new-grid"></div>
+  </div>
+</div>
+
+<!-- ══ STORE ══ -->
+<div class="view" id="view-store">
+  <div class="store-wrap">
+    <div class="breadcrumb">
+      <a onclick="showView('home')">HOME</a><span>&#8250;</span>
+      <span class="neon" id="col-crumb">ALL PRODUCTS</span>
+    </div>
+    <div class="col-header">
+      <div>
+        <div class="col-title" id="col-title">ALL PRODUCTS</div>
+        <div class="col-meta" id="col-meta">15 ITEMS</div>
       </div>
+    </div>
+    <div class="product-grid" id="store-grid"></div>
+  </div>
+</div>
 
-      <div class="products-grid" id="products-grid">
-        <!-- Cards injected by JS to simulate GraphQL response -->
-      </div>
-
-      <div class="graphql-panel" style="margin-top: 2rem">
-        <div class="panel-header" onclick="togglePanel(this)">
-          <div class="panel-header-left">
-            <div class="dot dot-r"></div>
-            <div class="dot dot-y"></div>
-            <div class="dot dot-g"></div>
-            <span class="panel-title"
-              >shopify-graphql.ts — GET_PRODUCT_DROP query</span
-            >
-          </div>
-          <span
-            style="
-              font-family: &quot;Space Mono&quot;, monospace;
-              font-size: 0.6rem;
-              color: var(--muted);
-            "
-            >▼ expand</span
-          >
+<!-- ══ COMMUNITY ══ -->
+<div class="view" id="view-community">
+  <div class="community-wrap">
+    <div class="community-hero">
+      <div>
+        <div style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.25em;color:var(--neon);text-transform:uppercase;margin-bottom:1rem">Community Hub</div>
+        <div class="comm-headline">JOIN THE<br><span>STREET SOUK</span><br>ECOSYSTEM</div>
+        <p class="comm-body">Register your brand to sell at our pop-ups, or RSVP for the next event. We&#x27;ve activated 125k+ attendees across Lagos, Accra, and London.</p>
+        <div class="comm-stats">
+          <div class="cstat"><div class="cstat-num">125K+</div><div class="cstat-lbl">Attendees</div></div>
+          <div class="cstat"><div class="cstat-num">100+</div><div class="cstat-lbl">Brands</div></div>
+          <div class="cstat"><div class="cstat-num">8M+</div><div class="cstat-lbl">Impressions</div></div>
         </div>
-        <div class="panel-body" id="code-panel">
-          <pre><span class="cmt">// lib/shopify.ts — Shopify Storefront API (Headless)</span>
-<span class="cmt">// Demonstrates GraphQL query structure for product variants + pricing</span>
-
-<span class="kw">const</span> <span class="field">SHOPIFY_STOREFRONT_URL</span> = <span class="str">`https://streetsouk.myshopify.com/api/2024-01/graphql.json`</span>;
-
-<span class="kw">export const</span> <span class="field">GET_PRODUCT_DROP</span> = <span class="str">`
-  query getLatestDrop($handle: String!) {
-    product(handle: $handle) {
-      id
-      title
-      description
-      tags
-      images(first: 3) {
-        edges { node { url altText } }
-      }
-      variants(first: 10) {
-        edges {
-          node {
-            id
-            title
-            availableForSale
-            price { amount currencyCode }
-            selectedOptions { name value }
-          }
-        }
-      }
-    }
-  }
-`</span>;
-
-<span class="cmt">// API call with access token — this returns what you see rendered above</span>
-<span class="kw">export async function</span> <span class="type">fetchProduct</span>(<span class="field">handle</span>: <span class="type">string</span>) {
-  <span class="kw">const</span> <span class="field">res</span> = <span class="kw">await</span> fetch(<span class="field">SHOPIFY_STOREFRONT_URL</span>, {
-    method: <span class="str">'POST'</span>,
-    headers: {
-      <span class="str">'Content-Type'</span>: <span class="str">'application/json'</span>,
-      <span class="str">'X-Shopify-Storefront-Access-Token'</span>: process.env.<span class="field">SHOPIFY_TOKEN</span>!
-    },
-    body: <span class="field">JSON</span>.stringify({
-      query: <span class="field">GET_PRODUCT_DROP</span>,
-      variables: { handle }
-    })
-  });
-  <span class="kw">return</span> (<span class="kw">await</span> <span class="field">res</span>.json()).<span class="field">data</span>.<span class="field">product</span>;
-}</pre>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <button class="btn-primary" onclick="document.getElementById('reg-anchor').scrollIntoView({behavior:'smooth'})">Register Brand</button>
+          <button class="btn-outline" onclick="document.getElementById('rsvp-anchor').scrollIntoView({behavior:'smooth'})">RSVP an Event</button>
         </div>
       </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- FEATURE B: BRAND REGISTRATION -->
-    <section id="register">
-      <div class="section-header">
-        <span class="section-label">Feature B</span>
-        <h2 class="section-title">Brand Registration</h2>
-        <span class="tech-badge">Supabase + Framer Motion</span>
-      </div>
-
-      <div class="form-wrapper">
-        <div class="form-description">
-          <h3>Register your<br /><span>brand</span> today.</h3>
-          <p>
-            Apply to showcase your streetwear label at the next Street Souk
-            pop-up. Data flows directly into Supabase — authenticated,
-            real-time, and ready.
-          </p>
-          <div class="form-stat">
-            <div class="stat">
-              <div class="stat-num">42</div>
-              <div class="stat-label">Brands registered</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">8</div>
-              <div class="stat-label">Spots remaining</div>
-            </div>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="background:var(--s1);border:1px solid var(--border);padding:1.5rem">
+          <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--neon);margin-bottom:1.2rem">Upcoming Events</div>
+          <div id="upcoming-events"></div>
+        </div>
+        <div class="code-panel">
+          <div class="cpanel-hdr" onclick="togglePanel(this)">
+            <div class="cpanel-left"><div class="dot dr"></div><div class="dot dy"></div><div class="dot dg"></div><span class="cpanel-title">supabaseClient.ts</span></div>
+            <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">&#9660; expand</span>
           </div>
-
-          <div class="graphql-panel" style="margin-top: 2rem">
-            <div class="panel-header" onclick="togglePanel(this)">
-              <div class="panel-header-left">
-                <div class="dot dot-r"></div>
-                <div class="dot dot-y"></div>
-                <div class="dot dot-g"></div>
-                <span class="panel-title">supabaseClient.ts</span>
-              </div>
-              <span
-                style="
-                  font-family: &quot;Space Mono&quot;, monospace;
-                  font-size: 0.6rem;
-                  color: var(--muted);
-                "
-                >▼ expand</span
-              >
-            </div>
-            <div class="panel-body">
-              <pre><span class="cmt">// lib/supabaseClient.ts</span>
-<span class="kw">import</span> { createClient } <span class="kw">from</span> <span class="str">'@supabase/supabase-js'</span>;
-
-<span class="kw">export const</span> <span class="field">supabase</span> = createClient(
-  process.env.<span class="field">NEXT_PUBLIC_SUPABASE_URL</span>!,
-  process.env.<span class="field">NEXT_PUBLIC_SUPABASE_ANON_KEY</span>!
-);
-
-<span class="cmt">// components/RegisterForm.tsx — submission handler</span>
-<span class="kw">const</span> <span class="field">handleSubmit</span> = <span class="kw">async</span> () => {
-  <span class="kw">const</span> { <span class="field">data</span>, <span class="field">error</span> } = <span class="kw">await</span> <span class="field">supabase</span>
-    .from(<span class="str">'brand_registrations'</span>)
-    .insert([{
-      brand_name: <span class="field">form</span>.<span class="field">brandName</span>,
-      designer_name: <span class="field">form</span>.<span class="field">designerName</span>,
-      category: <span class="field">form</span>.<span class="field">category</span>,
-      instagram: <span class="field">form</span>.<span class="field">instagram</span>,
-      bio: <span class="field">form</span>.<span class="field">bio</span>,
-      created_at: <span class="kw">new</span> Date()
-    }]);
-
-  <span class="kw">if</span> (!<span class="field">error</span>) triggerBrevoConfirmation(<span class="field">data</span>[0]);
-};</pre>
-            </div>
+          <div class="cpanel-body">
+<pre><span class="kw">const</span> { <span class="fd">data</span>, <span class="fd">error</span> } = <span class="kw">await</span> <span class="fd">supabase</span>
+  .from(<span class="str">'brand_registrations'</span>)
+  .insert([{
+    brand_name: <span class="fd">form</span>.<span class="fd">brandName</span>,
+    category:   <span class="fd">form</span>.<span class="fd">category</span>,
+    instagram:  <span class="fd">form</span>.<span class="fd">instagram</span>,
+    created_at: <span class="kw">new</span> Date()
+  }]);
+<span class="kw">if</span> (!<span class="fd">error</span>) triggerBrevo(<span class="fd">data</span>[0]);</pre>
           </div>
         </div>
+      </div>
+    </div>
 
-        <div>
-          <div class="reg-form">
+    <div id="reg-anchor"></div>
+    <div class="reg-panel">
+      <div class="reg-panel-hdr">
+        <div class="reg-panel-title">Brand Registration</div>
+        <span class="reg-panel-tag">Supabase</span>
+      </div>
+      <div class="reg-panel-body">
+        <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:3rem;align-items:start">
+          <div>
+            <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin-bottom:1.5rem">Apply to showcase your streetwear label at the next Street Souk pop-up. Submissions go directly into Supabase and trigger a Brevo confirmation email.</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+              <div class="cstat"><div class="cstat-num">42</div><div class="cstat-lbl">Registered</div></div>
+              <div class="cstat"><div class="cstat-num">8</div><div class="cstat-lbl">Spots left</div></div>
+            </div>
+            <div style="background:var(--s2);border:1px solid var(--border);padding:1rem">
+              <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--neon);margin-bottom:.75rem">What you get</div>
+              <div style="font-size:.84rem;color:var(--muted);line-height:1.8">&#10003; Dedicated vendor space<br>&#10003; SS marketing push pre-event<br>&#10003; Community tag on Instagram<br>&#10003; Access to SS online store listing</div>
+            </div>
+          </div>
+          <div>
             <div class="form-steps">
               <div class="step-tab active" data-step="1">01 Brand</div>
               <div class="step-tab" data-step="2">02 Designer</div>
               <div class="step-tab" data-step="3">03 Submit</div>
             </div>
-
-            <!-- Step 1 -->
-            <div class="form-step active" id="step-1">
-              <div class="field-group">
-                <label class="field-label">Brand Name *</label>
-                <input
-                  class="field-input"
-                  type="text"
-                  id="brand-name"
-                  placeholder="e.g. VOID Lagos"
-                />
+            <div class="fstep active" id="step-1">
+              <div class="form-row-2">
+                <div class="fg"><label class="flbl">Brand Name *</label><input class="finput" id="brand-name" placeholder="e.g. VOID Lagos"/></div>
+                <div class="fg"><label class="flbl">Category *</label><select class="fselect" id="category"><option value="">Select</option><option>Streetwear</option><option>Accessories</option><option>Footwear</option><option>Lifestyle</option></select></div>
               </div>
-              <div class="field-group">
-                <label class="field-label">Category *</label>
-                <select class="field-select" id="category">
-                  <option value="">Select category</option>
-                  <option>Streetwear</option>
-                  <option>Accessories</option>
-                  <option>Footwear</option>
-                  <option>Lifestyle</option>
-                  <option>Art & Print</option>
-                </select>
-              </div>
-              <div class="field-group">
-                <label class="field-label">Style Tags</label>
-                <div class="checkbox-group" id="style-tags">
-                  <label class="checkbox-item" onclick="toggleCheck(this)"
-                    ><input type="checkbox" />Afrocentric</label
-                  >
-                  <label class="checkbox-item" onclick="toggleCheck(this)"
-                    ><input type="checkbox" />Minimalist</label
-                  >
-                  <label class="checkbox-item" onclick="toggleCheck(this)"
-                    ><input type="checkbox" />Bold Graphics</label
-                  >
-                  <label class="checkbox-item" onclick="toggleCheck(this)"
-                    ><input type="checkbox" />Luxury</label
-                  >
-                  <label class="checkbox-item" onclick="toggleCheck(this)"
-                    ><input type="checkbox" />Underground</label
-                  >
-                </div>
-              </div>
-              <div class="form-nav">
-                <span class="step-counter">Step 1 / 3</span>
-                <button class="btn-primary" onclick="goStep(2)">Next →</button>
-              </div>
+              <div class="fg"><label class="flbl">Style Tags</label><div class="chk-group"><label class="chk-item" onclick="toggleChk(this)"><input type="checkbox">Afrocentric</label><label class="chk-item" onclick="toggleChk(this)"><input type="checkbox">Minimalist</label><label class="chk-item" onclick="toggleChk(this)"><input type="checkbox">Bold Graphics</label><label class="chk-item" onclick="toggleChk(this)"><input type="checkbox">Luxury</label><label class="chk-item" onclick="toggleChk(this)"><input type="checkbox">Underground</label></div></div>
+              <div class="fnav"><span class="sctr">Step 1 / 3</span><button class="btn-primary" onclick="goStep(2)">Next &#8594;</button></div>
             </div>
-
-            <!-- Step 2 -->
-            <div class="form-step" id="step-2">
-              <div class="field-group">
-                <label class="field-label">Designer / Founder Name *</label>
-                <input
-                  class="field-input"
-                  type="text"
-                  id="designer-name"
-                  placeholder="Your full name"
-                />
+            <div class="fstep" id="step-2">
+              <div class="form-row-2">
+                <div class="fg"><label class="flbl">Designer Name *</label><input class="finput" id="designer-name" placeholder="Your full name"/></div>
+                <div class="fg"><label class="flbl">Instagram Handle</label><input class="finput" id="instagram" placeholder="@yourbrand"/></div>
               </div>
-              <div class="field-group">
-                <label class="field-label">Instagram Handle</label>
-                <input
-                  class="field-input"
-                  type="text"
-                  id="instagram"
-                  placeholder="@yourbrand"
-                />
-              </div>
-              <div class="field-group">
-                <label class="field-label">Brand Story (short bio)</label>
-                <textarea
-                  class="field-textarea"
-                  id="bio"
-                  placeholder="Tell us about your brand in 2–3 sentences..."
-                ></textarea>
-              </div>
-              <div class="form-nav">
-                <button class="btn-outline" onclick="goStep(1)">← Back</button>
-                <span class="step-counter">Step 2 / 3</span>
-                <button class="btn-primary" onclick="goStep(3)">Next →</button>
-              </div>
+              <div class="fg"><label class="flbl">Brand Story</label><textarea class="ftarea" id="bio" placeholder="Tell us about your brand..."></textarea></div>
+              <div class="fg"><label class="flbl">Website (optional)</label><input class="finput" id="website" placeholder="https://yourbrand.com"/></div>
+              <div class="fnav"><button class="btn-outline" onclick="goStep(1)">&#8592; Back</button><span class="sctr">Step 2 / 3</span><button class="btn-primary" onclick="goStep(3)">Next &#8594;</button></div>
             </div>
-
-            <!-- Step 3 -->
-            <div class="form-step" id="step-3">
-              <div
-                id="review-summary"
-                style="
-                  margin-bottom: 1.5rem;
-                  font-family: &quot;Space Mono&quot;, monospace;
-                  font-size: 0.65rem;
-                  line-height: 2;
-                  color: var(--muted);
-                  border: 1px solid var(--border);
-                  padding: 1rem;
-                "
-              ></div>
-              <div class="field-group">
-                <label class="field-label">Confirm & Submit</label>
-                <p
-                  style="
-                    font-size: 0.8rem;
-                    color: var(--muted);
-                    line-height: 1.6;
-                  "
-                >
-                  By submitting you agree to the Street Souk vendor terms. Your
-                  data is stored in Supabase and a confirmation email will be
-                  dispatched via Brevo.
-                </p>
-              </div>
-              <div class="form-nav">
-                <button class="btn-outline" onclick="goStep(2)">← Back</button>
-                <span class="step-counter">Step 3 / 3</span>
-                <button
-                  class="btn-primary"
-                  id="submit-btn"
-                  onclick="submitForm()"
-                >
-                  Submit Application
-                </button>
-              </div>
+            <div class="fstep" id="step-3">
+              <div id="review-summary" style="margin-bottom:1.5rem;font-family:'Space Mono',monospace;font-size:.63rem;line-height:2;color:var(--muted);border:1px solid var(--border);padding:1rem;background:var(--s2)"></div>
+              <p style="font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:1rem">By submitting you agree to Street Souk vendor terms. Data is stored in Supabase and a confirmation email will be sent via Brevo.</p>
+              <div class="fnav"><button class="btn-outline" onclick="goStep(2)">&#8592; Back</button><span class="sctr">Step 3 / 3</span><button class="btn-primary" id="submit-btn" onclick="submitForm()">Submit Application</button></div>
             </div>
-          </div>
-
-          <!-- Supabase confirmation toast -->
-          <div class="supabase-toast" id="supabase-toast">
-            <div class="toast-header">
-              <div class="toast-dot"></div>
-              Supabase — brand_registrations — new row inserted
+            <div class="sb-toast" id="sb-toast">
+              <div class="toast-hdr"><div class="toast-dot"></div>Supabase &mdash; brand_registrations &mdash; row inserted</div>
+              <div class="toast-bdy" id="toast-bdy"></div>
             </div>
-            <div class="toast-body" id="toast-body"></div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <div class="divider"></div>
-
-    <!-- FEATURE C: RSVP + BREVO -->
-    <section id="events" style="padding-bottom: 4rem">
-      <div class="section-header">
-        <span class="section-label">Feature C</span>
-        <h2 class="section-title">Event RSVP</h2>
+    <div class="rsvp-section" id="rsvp-anchor">
+      <div class="rsvp-section-hdr">
+        <span class="rsvp-sec-label">Feature C</span>
+        <h2 class="rsvp-sec-title">Event RSVP</h2>
         <span class="tech-badge">Brevo + Supabase</span>
       </div>
-
-      <div class="rsvp-section">
-        <div class="event-card">
-          <div>
-            <div class="event-meta">
-              <div class="event-meta-item">
-                <div class="meta-label">Date</div>
-                <div class="meta-val">14 December 2026</div>
-              </div>
-              <div class="event-meta-item">
-                <div class="meta-label">Location</div>
-                <div class="meta-val">Victoria Island, Lagos</div>
-              </div>
-              <div class="event-meta-item">
-                <div class="meta-label">Format</div>
-                <div class="meta-val">Pop-up + DJ Set</div>
-              </div>
+      <div class="rsvp-layout">
+        <div class="rsvp-box">
+          <div class="evt-card">
+            <div class="evt-meta">
+              <div class="emi"><div class="emlbl">Date</div><div class="emval">14 June 2026</div></div>
+              <div class="emi"><div class="emlbl">Location</div><div class="emval">Victoria Island, Lagos</div></div>
+              <div class="emi"><div class="emlbl">Format</div><div class="emval">Pop-up + DJ Set</div></div>
             </div>
-            <div class="event-name">STREET SOUK<br />LAGOS VII</div>
-            <div class="event-desc">
-              50+ brands. One weekend. The biggest streetwear marketplace in
-              West Africa returns to VI.
+            <div class="evt-name">STREET SOUK<br>LAGOS VII</div>
+            <div class="evt-desc">50+ brands. One weekend. The biggest streetwear marketplace in West Africa returns to VI.</div>
+            <div class="evt-counter">
+              <div><div class="tnum" id="ticket-count">127</div><div class="tctr-lbl">RSVPs confirmed</div><div class="cap-warn">&#9679; Limited capacity</div></div>
             </div>
           </div>
-          <div class="rsvp-action">
-            <div class="ticket-counter">
-              <span class="ticket-num" id="ticket-count">127</span>
-              RSVPs confirmed
+          <div class="rsvp-form">
+            <div class="rsvp-fields">
+              <div class="fg" style="margin:0"><label class="flbl">Full Name</label><input class="finput" id="rsvp-name" placeholder="Your name"/></div>
+              <div class="fg" style="margin:0"><label class="flbl">Email</label><input class="finput" type="email" id="rsvp-email" placeholder="your@email.com"/></div>
+              <button class="btn-primary" style="width:100%;font-size:1.1rem;padding:1rem" onclick="submitRSVP()">RSVP NOW</button>
             </div>
-            <div
-              style="
-                font-family: &quot;Space Mono&quot;, monospace;
-                font-size: 0.6rem;
-                color: #ff5f56;
-                letter-spacing: 0.1em;
-                text-transform: uppercase;
-              "
-            >
-              ● Limited capacity
+            <div class="brevo-log" id="brevo-log">
+              <div class="ll" id="ll1"><span class="lp">[API]</span> POST /api/rsvp &mdash; received</div>
+              <div class="ll" id="ll2"><span class="lp">[Supabase]</span> Inserting into <span class="la">event_rsvps</span>...</div>
+              <div class="ll" id="ll3"><span class="lp">[Supabase]</span> <span class="lok">&#10003; Row inserted</span> &mdash; id: <span id="rsvp-id">&#x2014;</span></div>
+              <div class="ll" id="ll4"><span class="lp">[Brevo]</span> Triggering workflow <span class="lw">user_rsvp_confirmed</span>...</div>
+              <div class="ll" id="ll5"><span class="lp">[Brevo]</span> Template <span class="la">#14</span> dispatched &#8594; <span id="rsvp-email-out">&#x2014;</span></div>
+              <div class="ll" id="ll6"><span class="lp">[API]</span> <span class="lok">200 OK</span> &mdash; RSVP confirmed &#10003;</div>
             </div>
           </div>
         </div>
-
-        <div class="rsvp-form-inline">
-          <div class="rsvp-row">
-            <div class="field-group" style="margin-bottom: 0">
-              <label class="field-label">Full Name</label>
-              <input
-                class="field-input"
-                type="text"
-                id="rsvp-name"
-                placeholder="Your name"
-              />
-            </div>
-            <div class="field-group" style="margin-bottom: 0">
-              <label class="field-label">Email</label>
-              <input
-                class="field-input"
-                type="email"
-                id="rsvp-email"
-                placeholder="your@email.com"
-              />
-            </div>
-            <button
-              class="btn-primary"
-              onclick="submitRSVP()"
-              style="
-                white-space: nowrap;
-                padding: 0.8rem 1.5rem;
-                font-size: 1rem;
-              "
-            >
-              RSVP NOW
-            </button>
+        <div class="rsvp-info-panel">
+          <div class="rsvp-info-card">
+            <div class="ric-label">About the Event</div>
+            <div class="ric-title">SS LAGOS VII</div>
+            <div class="ric-body">Africa&#x27;s largest streetwear pop-up returns to Victoria Island. 50+ brands, live DJ sets, design competitions, and exclusive on-site drops.</div>
+            <div class="ric-tags"><span class="ric-tag">Free Entry</span><span class="ric-tag">50+ Brands</span><span class="ric-tag">Live DJ</span><span class="ric-tag">Exclusive Drops</span></div>
           </div>
-
-          <!-- Brevo log terminal -->
-          <div class="brevo-log" id="brevo-log">
-            <div class="log-line" id="log1">
-              <span class="log-prefix">[API]</span> POST /api/rsvp — received
-            </div>
-            <div class="log-line" id="log2">
-              <span class="log-prefix">[Supabase]</span> Inserting into
-              <span class="log-api">event_rsvps</span>...
-            </div>
-            <div class="log-line" id="log3">
-              <span class="log-prefix">[Supabase]</span>
-              <span class="log-ok">✓ Row inserted</span> — id: rsvp_<span
-                id="rsvp-id"
-                >—</span
-              >
-            </div>
-            <div class="log-line" id="log4">
-              <span class="log-prefix">[Brevo]</span> Triggering transactional
-              email workflow
-              <span class="log-warn">user_rsvp_confirmed</span>...
-            </div>
-            <div class="log-line" id="log5">
-              <span class="log-prefix">[Brevo]</span> Template
-              <span class="log-api">#14</span> dispatched →
-              <span id="rsvp-email-display">—</span>
-            </div>
-            <div class="log-line" id="log6">
-              <span class="log-prefix">[API]</span>
-              <span class="log-ok">200 OK</span> — RSVP confirmed ✓
+          <div class="rsvp-info-card">
+            <div class="ric-label">Past Events</div>
+            <div id="past-events-list"></div>
+          </div>
+          <div class="rsvp-info-card" style="background:#000;border-color:var(--neon)">
+            <div class="ric-label">Brevo Workflow</div>
+            <div class="ric-body" style="font-family:'Space Mono',monospace;font-size:.65rem;line-height:1.8">
+              RSVP Submit &#8594;<br><span style="color:var(--neon)">Supabase Insert</span> &#8594;<br><span style="color:#8be9fd">Next.js /api/rsvp</span> &#8594;<br><span style="color:#f1fa8c">Brevo Template #14</span> &#8594;<br><span style="color:var(--neon)">&#10003; Email Confirmed</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
 
-    <footer>
-      <div style="margin-bottom: 0.5rem">
-        <span>STREET SOUK</span> — Demo Prototype v1.0
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="overlayClose(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">&#10005;</button>
+    <div class="modal-crumb">
+      <a onclick="closeModal()">HOME</a><span>&rsaquo;</span>
+      <a id="mc-col" onclick="closeModal()">STORE</a><span>&rsaquo;</span>
+      <span class="neon" id="mc-product"></span>
+    </div>
+    <div class="modal-body">
+      <div class="modal-gallery">
+        <div class="modal-main" id="modal-main"><div class="mock-lg" id="modal-svg"></div></div>
+        <div class="modal-thumbs" id="modal-thumbs"></div>
       </div>
-      <div>
-        Built with Next.js · Shopify Storefront API · Supabase · Brevo · Framer
-        Motion · Deployed on Netlify
+      <div class="modal-info">
+        <div class="modal-badges">
+          <span class="mbadge excl" id="m-excl-badge">SS EXCLUSIVE</span>
+          <span class="mbadge brand" id="m-brand-badge"></span>
+        </div>
+        <div><div class="modal-title" id="m-title"></div><div class="modal-brand" id="m-brand"></div></div>
+        <div class="modal-price" id="m-price"></div>
+        <div id="m-sizes-wrap"><span class="size-lbl">Select Size</span><div class="size-row" id="m-sizes"></div></div>
+        <button class="bag-btn" id="bag-btn" onclick="bagIt()">BAG IT</button>
+        <div class="bag-confirm" id="bag-confirm">&#10003; Added to bag</div>
+        <div>
+          <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)">Description <span class="acc-icon">&#x2014;</span></button><div class="acc-body open" id="m-desc"></div></div>
+          <div class="acc-item"><button class="acc-trigger" onclick="toggleAcc(this)">Deliveries and Returns <span class="acc-icon">&#x2014;</span></button><div class="acc-body open">Delivery within Lagos: 2&ndash;3 business days. Nationwide: 3&ndash;5 business days. Returns accepted within 7 days &mdash; unworn, original packaging.</div></div>
+        </div>
       </div>
-    </footer>
+    </div>
+  </div>
+</div>
 
-    <script>
-      // ─── MOCK DATA (simulates Shopify GraphQL response) ──────────────────────
-      const MOCK_PRODUCTS = [
-        {
-          id: "gid://shopify/Product/001",
-          title: "VOID OVERSIZED TEE",
-          brand: "VOID Lagos",
-          tags: ["new-arrival", "exclusive"],
-          price: "₦35,000",
-          status: "new",
-          variants: ["XS", "S", "M", "L", "XL"],
-          color: "#1a1a1a",
-          shape: "tee",
-        },
-        {
-          id: "gid://shopify/Product/002",
-          title: "STREET SOUK HOODIE",
-          brand: "Street Souk Official",
-          tags: ["exclusive"],
-          price: "₦58,000",
-          status: "low",
-          variants: ["S", "M", "L"],
-          color: "#0a0a0a",
-          shape: "hoodie",
-        },
-        {
-          id: "gid://shopify/Product/003",
-          title: "LAGOS DRIP CARGO",
-          brand: "Krown Studios",
-          tags: ["sold-out"],
-          price: "₦45,000",
-          status: "sold",
-          variants: ["28", "30", "32", "34"],
-          color: "#111",
-          shape: "cargo",
-        },
-      ];
+<footer>
+  <div class="foot-top">
+    <div><div class="foot-brand">STREET SOUK</div><p class="foot-tag">Africa&#x27;s biggest streetwear community &amp; convention. Lagos &middot; Accra &middot; London.</p></div>
+    <div><div class="foot-col-title">Follow Us</div><ul class="foot-links"><li><a>INSTAGRAM</a></li><li><a>TIKTOK</a></li><li><a>TWITTER</a></li><li><a>YOUTUBE</a></li></ul></div>
+    <div><div class="foot-col-title">Contact</div><ul class="foot-links"><li><a>admin@streetsouk.com</a></li><li><a>+234 810 131 1638</a></li><li><a style="line-height:1.5">Harbor Point, Wilmot Point St,<br>Victoria Island, Lagos</a></li></ul></div>
+    <div><div class="foot-col-title">Stay Connected</div><p style="font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:1rem">Latest drops, exclusive collabs and streetwear trends.</p><div class="foot-email-row"><input class="foot-email" type="email" placeholder="EMAIL"/><button class="foot-submit">SUBMIT</button></div></div>
+  </div>
+  <div class="foot-bottom"><div class="foot-copy">&copy; 2025 STREETSOUK</div><div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">&#127475;&#127468; NG</div></div>
+</footer>
 
-      function renderProducts() {
-        const grid = document.getElementById("products-grid");
-        grid.innerHTML = MOCK_PRODUCTS.map((p, i) => {
-          const tagHtml =
-            p.status === "new"
-              ? '<span class="tag-new">New Drop</span>'
-              : p.status === "sold"
-                ? '<span class="tag-sold">Sold Out</span>'
-                : '<span class="tag-new" style="background:#ff9900;color:#000">Low Stock</span>';
+<script>
+// ── PRODUCTS (15 total) ──────────────────────────────────────────────────
+const PRODUCTS=[
+  {id:"p001",col:"exclusives",title:"SS X JBS IDENTITY HAT (CAMO)",brand:"JBS",price:"NGN 90,000",sizes:["One Size"],status:"available",excl:true,desc:"Limited collab between Street Souk and JBS. Camo colourway with embroidered identity patch. Only 50 units.",shape:"hat",bg:"#1a1a14"},
+  {id:"p002",col:"exclusives",title:"SS X JBS IDENTITY HAT (DENIM)",brand:"JBS",price:"NGN 90,000",sizes:["One Size"],status:"available",excl:true,desc:"Denim wash with SS x JBS co-branded patch. Part of the SS Uni Tour '26 drop.",shape:"hat2",bg:"#141820"},
+  {id:"p003",col:"exclusives",title:"SENUSSI EYO BELT (BROWN)",brand:"Senussi",price:"NGN 371,000",sizes:["One Size"],status:"available",excl:true,desc:"Hand-crafted brown leather belt with the Eyo masquerade buckle. Luxury piece from Senussi's heritage collection.",shape:"belt",bg:"#1a1510"},
+  {id:"p004",col:"exclusives",title:"SENUSSI EYO BELT (BLACK)",brand:"Senussi",price:"NGN 371,000",sizes:["One Size"],status:"available",excl:true,desc:"Black leather edition. The Eyo masquerade buckle is cast in solid metal — a statement accessory.",shape:"belt2",bg:"#0d0d0d"},
+  {id:"p005",col:"exclusives",title:"SS VARSITY JACKET",brand:"Street Souk Official",price:"NGN 185,000",sizes:["S","M","L","XL"],status:"available",excl:true,desc:"SS branded varsity with chenille patches. Heavy wool body, leather sleeves. Limited run of 30 units.",shape:"jacket",bg:"#0d1a0d"},
+  {id:"p006",col:"exclusives",title:"VOID OVERSIZED TEE",brand:"VOID Lagos",price:"NGN 35,000",sizes:["XS","S","M","L","XL"],status:"sold-out",excl:true,desc:"Drop 001 from VOID Lagos. 400gsm heavyweight cotton. Sold out — restocking for SS Lagos VII.",shape:"tee",bg:"#111"},
+  {id:"p007",col:"exclusives",title:"KROWN STUDIOS CARGO PANTS",brand:"Krown Studios",price:"NGN 45,000",sizes:["28","30","32","34"],status:"available",excl:true,desc:"Wide-leg cargo silhouette with oversized utility pockets. Charcoal ripstop fabric.",shape:"cargo",bg:"#141414"},
+  {id:"p008",col:"exclusives",title:"SS STRIPED POLO",brand:"Street Souk Official",price:"NGN 58,000",sizes:["S","M","L","XL","XXL"],status:"available",excl:true,desc:"Ribbed knit polo in black and white stripe. Embroidered SS logo at chest.",shape:"polo",bg:"#111"},
+  {id:"p009",col:"new-arrivals",title:"SHUT UP 69 JERSEY",brand:"Unknown",price:"NGN 42,000",sizes:["S","M","L","XL"],status:"available",excl:false,desc:"Oversized mesh jersey featuring the 'SHUT UP 69' graphic. Unisex fit.",shape:"jersey",bg:"#0d1a0d"},
+  {id:"p010",col:"new-arrivals",title:"LAGOS DRIP HOODIE",brand:"Afolarinn",price:"NGN 65,000",sizes:["S","M","L"],status:"available",excl:false,desc:"Heavy-weight pull-over hoodie. Embroidered 'Lagos Drip' across the chest in tonal thread.",shape:"hoodie",bg:"#111"},
+  {id:"p011",col:"new-arrivals",title:"ZAYLEVELTEN GRAPHIC TEE",brand:"ZayLevelTen",price:"NGN 28,000",sizes:["XS","S","M","L","XL"],status:"available",excl:false,desc:"'Loves African Brands' screen print on 100% cotton base.",shape:"tee2",bg:"#1a1010"},
+  {id:"p012",col:"new-arrivals",title:"SS BUCKET HAT",brand:"Street Souk Official",price:"NGN 22,000",sizes:["One Size"],status:"available",excl:false,desc:"Cotton twill bucket hat with embroidered SS star logo.",shape:"bucket",bg:"#0d0d0d"},
+  {id:"p013",col:"new-arrivals",title:"AFOLARINN BOMBER JACKET",brand:"Afolarinn",price:"NGN 95,000",sizes:["S","M","L","XL"],status:"available",excl:false,desc:"Satin bomber with Afolarinn embroidery on the back. Quilted lining, ribbed cuffs.",shape:"jacket",bg:"#0d0d1a"},
+  {id:"p014",col:"new-arrivals",title:"KROWN STUDIOS WORK SHIRT",brand:"Krown Studios",price:"NGN 38,000",sizes:["S","M","L","XL"],status:"available",excl:false,desc:"Heavyweight twill work shirt in charcoal. Box pockets, Krown woven label at hem.",shape:"polo",bg:"#141414"},
+  {id:"p015",col:"new-arrivals",title:"SS UNI TOUR TEE '26",brand:"Street Souk Official",price:"NGN 18,000",sizes:["XS","S","M","L","XL","XXL"],status:"available",excl:false,desc:"Official SS Uni Tour 2026 tee. Tour dates printed on the back. Available at all campus stops.",shape:"tee",bg:"#0d1a0d"},
+  {id:"p016",col:"new-arrivals",title:"NAIJA DRIP SHORTS",brand:"Afolarinn",price:"NGN 25,000",sizes:["S","M","L","XL"],status:"available",excl:false,desc:"Relaxed-fit nylon shorts with 'Naija Drip' embroidered at left thigh. Side pockets.",shape:"cargo",bg:"#141420"},
+  {id:"p017",col:"new-arrivals",title:"SS CAMPUS CAP",brand:"Street Souk Official",price:"NGN 15,000",sizes:["One Size"],status:"available",excl:false,desc:"6-panel structured cap in black with SS Uni Tour '26 embroidery. Adjustable strap.",shape:"hat",bg:"#111"},
+];
 
-          const svgShape =
-            p.shape === "hoodie"
-              ? hoodieSVG()
-              : p.shape === "tee"
-                ? teeSVG()
-                : cargoSVG();
+// ── IMAGE CAROUSEL SCENES (using Unsplash street fashion / event images) ──
+const CAROUSEL_IMAGES = [
+  {
+    // Edgy, late-night Lagos Alté youth fashion style
+    url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=80",
+    label: "Lagos Style"
+  },
+  {
 
-          const variantHtml = p.variants
-            .map(
-              (v, vi) =>
-                `<span class="variant-pill${vi === 0 ? " active" : ""}" onclick="selectVariant(this)">${v}</span>`,
-            )
-            .join("");
+    url: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1600&auto=format&fit=crop&q=80",
 
-          return `
-      <div class="product-card" style="animation-delay:${i * 0.1}s">
-        <div class="product-img">
-          ${tagHtml}
-          <div class="product-placeholder">
-            ${svgShape}
-          </div>
-        </div>
-        <div class="product-info">
-          <div class="product-brand">${p.brand}</div>
-          <div class="product-name">${p.title}</div>
-          <div class="product-variants">${variantHtml}</div>
-          <div class="product-footer">
-            <div class="price">${p.price}</div>
-            ${
-              p.status !== "sold"
-                ? `<button class="add-btn" onclick="addToCart('${p.id}', this)">Add to Cart</button>`
-                : `<span style="font-family:'Space Mono',monospace;font-size:0.6rem;color:#ff5f56;letter-spacing:0.1em">SOLD OUT</span>`
-            }
-          </div>
-        </div>
-      </div>`;
-        }).join("");
-      }
+    label: "Community"
 
-      function hoodieSVG() {
-        return `<svg class="hoodie-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M45 15 C45 8 52 5 60 5 C68 5 75 8 75 15" stroke="#00FF00" stroke-width="2" fill="none"/>
-    <path d="M45 15 L20 40 L10 80 L30 85 L30 135 L90 135 L90 85 L110 80 L100 40 L75 15" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
-    <path d="M45 15 C50 25 55 30 60 30 C65 30 70 25 75 15" fill="#111" stroke="#333" stroke-width="1"/>
-    <path d="M30 85 L30 135" stroke="#00FF00" stroke-width="0.5" stroke-dasharray="4 4"/>
-    <path d="M90 85 L90 135" stroke="#00FF00" stroke-width="0.5" stroke-dasharray="4 4"/>
-    <text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7" fill="#00FF00" letter-spacing="2">SS</text>
-  </svg>`;
-      }
+  },
+    {
+    // High-energy Afro-skate & street culture vibe
+    url: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1600&auto=format&fit=crop&q=80",
+    label: "Street Souk Culture"
+  },
+  {
+    // Hypebeast-style exclusive drops and sneakers
+    url: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1600&auto=format&fit=crop&q=80",
+    label: "Exclusive Drops"
+  },
+  {
+    // Raw, high-fashion graphic tee / event merch look
+    url: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1600&auto=format&fit=crop&q=80",
+    label: "Pop-Up Events"
+  },
+  {
+    // Heavy Baggy Jeans / Oversized Skater-Streetwear aesthetic
+    url: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1600&auto=format&fit=crop&q=80",
+    label: "Streetwear Drip"
+  }
+];
 
-      function teeSVG() {
-        return `<svg class="hoodie-svg" viewBox="0 0 120 130" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M45 10 L20 35 L35 45 L35 120 L85 120 L85 45 L100 35 L75 10 C72 15 65 18 60 18 C55 18 48 15 45 10Z" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
-    <path d="M45 10 C50 18 55 20 60 20 C65 20 70 18 75 10" fill="none" stroke="#444" stroke-width="1"/>
-    <text x="60" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#00FF00" letter-spacing="3">VOID</text>
-    <path d="M40 90 L80 90" stroke="#00FF00" stroke-width="0.5"/>
-  </svg>`;
-      }
+// ── SVG product shapes ──────────────────────────────────────────────────
+function svg(shape,size){
+  const s=size==='lg'?130:80;
+  const shapes={
+    hat:`<svg viewBox="0 0 120 80" fill="none" width="${s}"><ellipse cx="60" cy="55" rx="55" ry="18" fill="#2a2a1a" stroke="#444" stroke-width="1.5"/><path d="M15 55 Q20 20 60 18 Q100 20 105 55" fill="#3a3a22" stroke="#555" stroke-width="1.5"/><path d="M25 50 Q60 32 95 50" stroke="#0f0" stroke-width="1" stroke-dasharray="3 3" fill="none"/><rect x="45" y="30" width="30" height="16" rx="2" fill="none" stroke="#0f0" stroke-width="1"/><text x="60" y="42" text-anchor="middle" font-family="monospace" font-size="6" fill="#0f0">SS</text></svg>`,
+    hat2:`<svg viewBox="0 0 120 80" fill="none" width="${s}"><ellipse cx="60" cy="55" rx="55" ry="18" fill="#1a2030" stroke="#444" stroke-width="1.5"/><path d="M15 55 Q20 20 60 18 Q100 20 105 55" fill="#243040" stroke="#555" stroke-width="1.5"/><line x1="15" y1="40" x2="105" y2="40" stroke="#334" stroke-width="1"/><line x1="15" y1="46" x2="105" y2="46" stroke="#334" stroke-width="1"/><rect x="45" y="28" width="30" height="16" rx="2" fill="none" stroke="#0f0" stroke-width="1"/><text x="60" y="40" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#0f0">JBS</text></svg>`,
+    belt:`<svg viewBox="0 0 160 80" fill="none" width="${Math.round(s*1.4)}"><path d="M10 40 Q40 30 80 35 Q120 40 150 35" stroke="#8B5A2B" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M10 40 Q40 30 80 35 Q120 40 150 35" stroke="#A0723A" stroke-width="10" stroke-linecap="round" fill="none"/><rect x="5" y="28" width="28" height="24" rx="3" fill="#555" stroke="#0f0" stroke-width="1.5"/><line x1="19" y1="28" x2="19" y2="52" stroke="#0f0" stroke-width="1"/><line x1="5" y1="40" x2="33" y2="40" stroke="#0f0" stroke-width="1"/></svg>`,
+    belt2:`<svg viewBox="0 0 160 80" fill="none" width="${Math.round(s*1.4)}"><path d="M10 40 Q40 30 80 35 Q120 40 150 35" stroke="#1a1a1a" stroke-width="14" stroke-linecap="round" fill="none"/><path d="M10 40 Q40 30 80 35 Q120 40 150 35" stroke="#333" stroke-width="10" stroke-linecap="round" fill="none"/><rect x="5" y="28" width="28" height="24" rx="3" fill="#222" stroke="#0f0" stroke-width="1.5"/><line x1="19" y1="28" x2="19" y2="52" stroke="#0f0" stroke-width="1"/><line x1="5" y1="40" x2="33" y2="40" stroke="#0f0" stroke-width="1"/></svg>`,
+    tee:`<svg viewBox="0 0 120 130" fill="none" width="${s}"><path d="M45 10 L20 35 L35 45 L35 120 L85 120 L85 45 L100 35 L75 10 C72 15 65 18 60 18 C55 18 48 15 45 10Z" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/><text x="60" y="75" text-anchor="middle" font-family="monospace" font-size="8" fill="#0f0" letter-spacing="3">VOID</text></svg>`,
+    tee2:`<svg viewBox="0 0 120 130" fill="none" width="${s}"><path d="M45 10 L20 35 L35 45 L35 120 L85 120 L85 45 L100 35 L75 10 C72 15 65 18 60 18 C55 18 48 15 45 10Z" fill="#2a1010" stroke="#444" stroke-width="1.5"/><text x="60" y="65" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#0f0">LOVES</text><text x="60" y="75" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#0f0">AFRICAN</text><text x="60" y="85" text-anchor="middle" font-family="monospace" font-size="5.5" fill="#0f0">BRANDS</text></svg>`,
+    hoodie:`<svg viewBox="0 0 120 140" fill="none" width="${s}"><path d="M45 15 C45 8 52 5 60 5 C68 5 75 8 75 15" stroke="#0f0" stroke-width="2" fill="none"/><path d="M45 15 L20 40 L10 80 L30 85 L30 135 L90 135 L90 85 L110 80 L100 40 L75 15" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/><text x="60" y="100" text-anchor="middle" font-family="monospace" font-size="7" fill="#0f0" letter-spacing="2">SS</text></svg>`,
+    cargo:`<svg viewBox="0 0 120 150" fill="none" width="${s}"><path d="M30 5 L90 5 L95 75 L75 80 L75 145 L60 145 L60 80" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/><path d="M60 80 L45 80 L45 145 L60 145" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/><path d="M25 75 L45 80" stroke="#333" stroke-width="1.5"/><rect x="32" y="30" width="20" height="22" rx="2" fill="none" stroke="#0f0" stroke-width="1"/><rect x="68" y="30" width="20" height="22" rx="2" fill="none" stroke="#0f0" stroke-width="1"/><line x1="30" y1="5" x2="25" y2="75" stroke="#333" stroke-width="1.5"/><line x1="90" y1="5" x2="95" y2="75" stroke="#333" stroke-width="1.5"/></svg>`,
+    jacket:`<svg viewBox="0 0 120 130" fill="none" width="${s}"><path d="M45 8 L18 30 L10 70 L35 75 L35 125 L85 125 L85 75 L110 70 L102 30 L75 8 C70 20 65 22 60 22 C55 22 50 20 45 8Z" fill="#0d1a0d" stroke="#1a3d1a" stroke-width="1.5"/><text x="60" y="85" text-anchor="middle" font-family="monospace" font-size="7" fill="#0f0">VARSITY</text></svg>`,
+    jersey:`<svg viewBox="0 0 120 130" fill="none" width="${s}"><path d="M40 10 L15 35 L30 42 L30 120 L90 120 L90 42 L105 35 L80 10 C77 16 70 19 60 19 C50 19 43 16 40 10Z" fill="#0d1a0d" stroke="#1a3d1a" stroke-width="1.5"/><text x="60" y="70" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#0f0">SHUT UP</text><text x="60" y="84" text-anchor="middle" font-family="monospace" font-size="13" fill="#0f0" font-weight="bold">69</text></svg>`,
+    polo:`<svg viewBox="0 0 120 130" fill="none" width="${s}"><path d="M45 10 L20 35 L35 45 L35 120 L85 120 L85 45 L100 35 L75 10 C72 15 65 18 60 18 C55 18 48 15 45 10Z" fill="#111" stroke="#333" stroke-width="1.5"/><line x1="35" y1="55" x2="85" y2="55" stroke="#eee" stroke-width="3"/><line x1="35" y1="66" x2="85" y2="66" stroke="#111" stroke-width="3"/><line x1="35" y1="77" x2="85" y2="77" stroke="#eee" stroke-width="3"/><line x1="35" y1="88" x2="85" y2="88" stroke="#111" stroke-width="3"/><line x1="35" y1="99" x2="85" y2="99" stroke="#eee" stroke-width="3"/></svg>`,
+    bucket:`<svg viewBox="0 0 120 100" fill="none" width="${s}"><ellipse cx="60" cy="75" rx="52" ry="14" fill="#111" stroke="#333" stroke-width="1.5"/><path d="M20 75 Q25 30 60 28 Q95 30 100 75" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/><ellipse cx="60" cy="30" rx="22" ry="8" fill="#111" stroke="#444" stroke-width="1"/><text x="60" y="58" text-anchor="middle" font-family="monospace" font-size="7" fill="#0f0">&#x2605;</text></svg>`,
+  };
+  return shapes[shape]||shapes['tee'];
+}
 
-      function cargoSVG() {
-        return `<svg class="hoodie-svg" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M30 5 L90 5 L95 75 L75 80 L75 145 L60 145 L60 80" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
-    <path d="M60 80 L45 80 L45 145 L60 145" fill="#1a1a1a" stroke="#333" stroke-width="1.5"/>
-    <path d="M25 75 L45 80" stroke="#333" stroke-width="1.5"/>
-    <rect x="32" y="30" width="20" height="22" rx="2" fill="none" stroke="#00FF00" stroke-width="1"/>
-    <rect x="68" y="30" width="20" height="22" rx="2" fill="none" stroke="#00FF00" stroke-width="1"/>
-    <line x1="30" y1="5" x2="25" y2="75" stroke="#333" stroke-width="1.5"/>
-    <line x1="90" y1="5" x2="95" y2="75" stroke="#333" stroke-width="1.5"/>
-  </svg>`;
-      }
+// ── IMAGE CAROUSEL ───────────────────────────────────────────────────────
+let bgIdx=0,bgTimer=null;
 
-      function selectVariant(el) {
-        el.closest(".product-variants")
-          .querySelectorAll(".variant-pill")
-          .forEach((v) => v.classList.remove("active"));
-        el.classList.add("active");
-      }
+function buildBgCarousel(){
+  const container=document.getElementById('bg-carousel');
+  const dotsEl=document.getElementById('hero-dots');
+  if(!container)return;
 
-      function addToCart(id, btn) {
-        btn.textContent = "✓ Added";
-        btn.style.background = "var(--neon)";
-        btn.style.color = "var(--black)";
-        btn.disabled = true;
-      }
+  // Build slides with real images
+  container.innerHTML=CAROUSEL_IMAGES.map((img,i)=>`
+    <div class="bg-slide${i===0?' active':''}" 
+         style="background-image:url('${img.url}');background-size:cover;background-position:center top">
+    </div>`).join('');
 
-      function togglePanel(header) {
-        const body = header.nextElementSibling;
-        const arrow = header.querySelector("span:last-child");
-        body.classList.toggle("open");
-        arrow.textContent = body.classList.contains("open")
-          ? "▲ collapse"
-          : "▼ expand";
-      }
+  // Build dots
+  dotsEl.innerHTML=CAROUSEL_IMAGES.map((_,i)=>`
+    <div class="hdot${i===0?' active':''}" onclick="goBgSlide(${i})"></div>`).join('');
 
-      // ─── MULTI-STEP FORM ──────────────────────────────────────────────────────
-      let currentStep = 1;
+  document.getElementById('slide-tot').textContent=String(CAROUSEL_IMAGES.length).padStart(2,'0');
+  startBgTimer();
 
-      function goStep(n) {
-        document
-          .querySelectorAll(".form-step")
-          .forEach((s) => s.classList.remove("active"));
-        document
-          .querySelectorAll(".step-tab")
-          .forEach((t) => t.classList.remove("active"));
-        document.getElementById("step-" + n).classList.add("active");
-        document
-          .querySelector(`.step-tab[data-step="${n}"]`)
-          .classList.add("active");
-        currentStep = n;
+  // Preload all images
+  CAROUSEL_IMAGES.forEach(img=>{
+    const im=new Image();
+    im.src=img.url;
+  });
+}
 
-        if (n === 3) {
-          const bn =
-            document.getElementById("brand-name").value || "VOID Lagos";
-          const dn = document.getElementById("designer-name").value || "—";
-          const cat = document.getElementById("category").value || "—";
-          const ig = document.getElementById("instagram").value || "—";
-          document.getElementById("review-summary").innerHTML =
-            `<span style="color:var(--neon)">brand_name</span>: ${bn}<br>` +
-            `<span style="color:var(--neon)">designer</span>: ${dn}<br>` +
-            `<span style="color:var(--neon)">category</span>: ${cat}<br>` +
-            `<span style="color:var(--neon)">instagram</span>: ${ig}`;
-        }
-      }
+function goBgSlide(idx){
+  const slides=document.querySelectorAll('.bg-slide');
+  const dots=document.querySelectorAll('.hdot');
+  slides[bgIdx].classList.remove('active');
+  dots[bgIdx].classList.remove('active');
+  bgIdx=idx;
+  slides[bgIdx].classList.add('active');
+  dots[bgIdx].classList.add('active');
+  document.getElementById('slide-cur').textContent=String(bgIdx+1).padStart(2,'0');
+  startBgTimer();
+}
 
-      function toggleCheck(el) {
-        el.classList.toggle("checked");
-      }
+function startBgTimer(){
+  clearInterval(bgTimer);
+  bgTimer=setInterval(()=>goBgSlide((bgIdx+1)%CAROUSEL_IMAGES.length),4000);
+}
 
-      function submitForm() {
-        const btn = document.getElementById("submit-btn");
-        btn.textContent = "Inserting...";
-        btn.disabled = true;
+// ── PRODUCT GRID ────────────────────────────────────────────────────────
+let cartCount=0;
 
-        setTimeout(() => {
-          const bn =
-            document.getElementById("brand-name").value || "VOID Lagos";
-          const dn =
-            document.getElementById("designer-name").value || "Demo User";
-          const cat = document.getElementById("category").value || "Streetwear";
-          const ig = document.getElementById("instagram").value || "@voiddemo";
-          const ts = new Date().toISOString();
-          const rid = "br_" + Math.random().toString(36).substr(2, 8);
+function card(p,delay){
+  const sold=p.status==='sold-out';
+  return`<div class="product-card" style="animation-delay:${delay}s" onclick="openProduct('${p.id}')">
+    <div class="pimg" style="background:${p.bg}">
+      ${p.excl?'<span class="ss-badge">SS EXCLUSIVE</span>':''}
+      ${sold?'<span class="sold-badge">SOLD OUT</span>':''}
+      <div class="mock">${svg(p.shape,'sm')}</div>
+    </div>
+    <div class="pinfo">
+      <div class="p-brand">${p.brand}</div>
+      <div class="p-title">${p.title}</div>
+      <div class="p-price${sold?' out':''}">${p.price}</div>
+    </div>
+  </div>`;
+}
 
-          const toast = document.getElementById("supabase-toast");
-          document.getElementById("toast-body").innerHTML =
-            `<span class="toast-key">id</span>: ${rid}<br>` +
-            `<span class="toast-key">brand_name</span>: <span class="toast-row">"${bn}"</span><br>` +
-            `<span class="toast-key">designer_name</span>: <span class="toast-row">"${dn}"</span><br>` +
-            `<span class="toast-key">category</span>: <span class="toast-row">"${cat}"</span><br>` +
-            `<span class="toast-key">instagram</span>: <span class="toast-row">"${ig}"</span><br>` +
-            `<span class="toast-key">created_at</span>: <span class="toast-row">"${ts}"</span>`;
+function renderGrid(id,products,limit){
+  const el=document.getElementById(id);if(!el)return;
+  const list=limit?products.slice(0,limit):products;
+  el.innerHTML=list.map((p,i)=>card(p,i*0.06)).join('');
+}
 
-          toast.style.display = "block";
-          btn.textContent = "✓ Application Submitted";
-          btn.style.opacity = "0.5";
-        }, 900);
-      }
+// ── VIEWS ────────────────────────────────────────────────────────────────
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  ['discover','store','community','rsvp'].forEach(n=>{const el=document.getElementById('nav-'+n);if(el)el.classList.remove('active');});
+  const m={home:'nav-discover',store:'nav-store',community:'nav-community'};
+  if(m[name]&&document.getElementById(m[name]))document.getElementById(m[name]).classList.add('active');
+}
 
-      // ─── RSVP + BREVO LOG ─────────────────────────────────────────────────────
-      function submitRSVP() {
-        const name = document.getElementById("rsvp-name").value || "Demo User";
-        const email =
-          document.getElementById("rsvp-email").value || "demo@streetsouk.com";
+function showCollection(col){
+  const titles={exclusives:'SS EXCLUSIVES','new-arrivals':'NEW ARRIVALS',all:'ALL PRODUCTS'};
+  const products=col==='all'?PRODUCTS:PRODUCTS.filter(p=>p.col===col);
+  document.getElementById('col-title').textContent=titles[col]||col.toUpperCase();
+  document.getElementById('col-crumb').textContent=titles[col]||col.toUpperCase();
+  document.getElementById('col-meta').textContent=products.length+' ITEMS';
+  renderGrid('store-grid',products);
+  showView('store');
+}
 
-        const log = document.getElementById("brevo-log");
-        log.style.display = "block";
+// ── MODAL ────────────────────────────────────────────────────────────────
+function openProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+  document.getElementById('mc-product').textContent=p.title;
+  document.getElementById('m-brand-badge').textContent=p.brand;
+  document.getElementById('m-title').textContent=p.title;
+  document.getElementById('m-brand').textContent=p.brand;
+  document.getElementById('m-price').textContent=p.price;
+  document.getElementById('m-desc').textContent=p.desc;
+  const excBadge=document.getElementById('m-excl-badge');
+  excBadge.style.display=p.excl?'':'none';
+  document.getElementById('modal-svg').innerHTML=svg(p.shape,'lg');
+  document.getElementById('modal-main').style.background=p.bg;
+  document.getElementById('modal-thumbs').innerHTML=[0,1,2].map(i=>`<div class="thumb${i===0?' active':''}" onclick="switchThumb(this,'${p.shape}','${p.bg}')">${svg(p.shape,'sm')}</div>`).join('');
+  const sw=document.getElementById('m-sizes-wrap');
+  const se=document.getElementById('m-sizes');
+  if(p.sizes.length===1&&p.sizes[0]==='One Size'){sw.style.display='none';}
+  else{sw.style.display='block';se.innerHTML=p.sizes.map((s,i)=>`<button class="size-btn${i===0?' active':''}" onclick="selSize(this)">${s}</button>`).join('');}
+  const bb=document.getElementById('bag-btn');
+  const bc=document.getElementById('bag-confirm');
+  bb.style.display='block';bb.textContent=p.status==='sold-out'?'SOLD OUT':'BAG IT';bb.disabled=p.status==='sold-out';bc.style.display='none';
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function switchThumb(el,shape,bg){document.querySelectorAll('.thumb').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.getElementById('modal-main').style.background=bg;document.getElementById('modal-svg').innerHTML=svg(shape,'lg');}
+function closeModal(){document.getElementById('modal-overlay').classList.remove('open');document.body.style.overflow='';}
+function overlayClose(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
+function selSize(btn){btn.closest('.size-row').querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+function bagIt(){document.getElementById('bag-btn').style.display='none';document.getElementById('bag-confirm').style.display='block';cartCount++;document.getElementById('cart-count').textContent=cartCount;}
+function toggleAcc(btn){const b=btn.nextElementSibling;const i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'\u2014':'+';}
+function togglePanel(hdr){const b=hdr.nextElementSibling;const a=hdr.querySelector('span:last-child');b.classList.toggle('open');a.textContent=b.classList.contains('open')?'\u25b2 collapse':'\u25bc expand';}
 
-        const lines = ["log1", "log2", "log3", "log4", "log5", "log6"];
-        lines.forEach((l) =>
-          document.getElementById(l).classList.remove("active"),
-        );
+// ── FORM ─────────────────────────────────────────────────────────────────
+function goStep(n){
+  document.querySelectorAll('.fstep').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('step-'+n).classList.add('active');
+  document.querySelector('.step-tab[data-step="'+n+'"]').classList.add('active');
+  if(n===3){const bn=document.getElementById('brand-name').value||'VOID Lagos';const dn=document.getElementById('designer-name').value||'--';const cat=document.getElementById('category').value||'--';const ig=document.getElementById('instagram').value||'--';document.getElementById('review-summary').innerHTML='<span style="color:var(--neon)">brand_name</span>: '+bn+'<br><span style="color:var(--neon)">designer</span>: '+dn+'<br><span style="color:var(--neon)">category</span>: '+cat+'<br><span style="color:var(--neon)">instagram</span>: '+ig;}
+}
+function toggleChk(el){el.classList.toggle('checked');}
+function submitForm(){
+  const btn=document.getElementById('submit-btn');btn.textContent='Inserting...';btn.disabled=true;
+  setTimeout(()=>{const bn=document.getElementById('brand-name').value||'VOID Lagos';const dn=document.getElementById('designer-name').value||'Demo User';const cat=document.getElementById('category').value||'Streetwear';const ig=document.getElementById('instagram').value||'@voiddemo';const ts=new Date().toISOString();const rid='br_'+Math.random().toString(36).substr(2,8);const t=document.getElementById('sb-toast');document.getElementById('toast-bdy').innerHTML='<span class="tkey">id</span>: '+rid+'<br><span class="tkey">brand_name</span>: <span class="trow">"'+bn+'"</span><br><span class="tkey">designer</span>: <span class="trow">"'+dn+'"</span><br><span class="tkey">category</span>: <span class="trow">"'+cat+'"</span><br><span class="tkey">created_at</span>: <span class="trow">"'+ts+'"</span>';t.style.display='block';btn.textContent='\u2713 Application Submitted';btn.style.opacity='.5';},900);
+}
 
-        document.getElementById("rsvp-id").textContent =
-          "rsvp_" + Math.random().toString(36).substr(2, 8);
-        document.getElementById("rsvp-email-display").textContent = email;
+// ── RSVP ─────────────────────────────────────────────────────────────────
+function submitRSVP(){
+  const email=document.getElementById('rsvp-email').value||'demo@streetsouk.com';
+  const log=document.getElementById('brevo-log');log.style.display='block';
+  const ls=['ll1','ll2','ll3','ll4','ll5','ll6'];ls.forEach(l=>document.getElementById(l).classList.remove('active'));
+  document.getElementById('rsvp-id').textContent=Math.random().toString(36).substr(2,8);
+  document.getElementById('rsvp-email-out').textContent=email;
+  ls.forEach((id,i)=>setTimeout(()=>{if(i>0)document.getElementById(ls[i-1]).classList.remove('active');document.getElementById(id).classList.add('active');if(i===5){const c=document.getElementById('ticket-count');c.textContent=parseInt(c.textContent)+1;}},i*500));
+}
 
-        lines.forEach((id, i) => {
-          setTimeout(() => {
-            if (i > 0)
-              document.getElementById(lines[i - 1]).classList.remove("active");
-            document.getElementById(id).classList.add("active");
-            if (i === 5) {
-              const count = document.getElementById("ticket-count");
-              count.textContent = parseInt(count.textContent) + 1;
-            }
-          }, i * 500);
-        });
-      }
+// ── COMMUNITY DATA ────────────────────────────────────────────────────────
+const UPCOMING=[{name:"SS UNILAG '26",date:"21 Jun 2026",loc:"University of Lagos"},{name:"SS BELLS '26",date:"28 Jun 2026",loc:"Bells University, Ota"},{name:"SS UNIUI '26",date:"5 Jul 2026",loc:"University of Ibadan"}];
+const PAST=[{name:"SS Lagos '25",att:"8,400+"},{name:"SS Accra '25",att:"5,200+"},{name:"SS London '24",att:"3,800+"}];
 
-      // Init
-      renderProducts();
-    </script>
-  </body>
+function buildCommunityData(){
+  const ue=document.getElementById('upcoming-events');
+  if(ue)ue.innerHTML=UPCOMING.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border)"><div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em">${e.name}</div><div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">${e.loc}</div></div><div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--neon)">${e.date}</div></div>`).join('');
+  const pe=document.getElementById('past-events-list');
+  if(pe)pe.innerHTML=PAST.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em">${e.name}</div><div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--neon)">${e.att}</div></div>`).join('');
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────
+buildBgCarousel();
+
+// Home: 4 exclusives, 8 new arrivals
+renderGrid('home-excl-grid', PRODUCTS.filter(p=>p.col==='exclusives'), 4);
+renderGrid('home-new-grid', PRODUCTS.filter(p=>p.col==='new-arrivals'), 8);
+
+// Pre-populate the store grid data behind the scenes
+const defaultProducts = PRODUCTS;
+document.getElementById('col-title').textContent = 'ALL PRODUCTS';
+document.getElementById('col-crumb').textContent = 'ALL PRODUCTS';
+document.getElementById('col-meta').textContent = defaultProducts.length + ' ITEMS';
+renderGrid('store-grid', defaultProducts);
+
+// Explicitly ensure the default view is Discover (Home) on load
+showView('home');
+buildCommunityData();
+</script>
+</body>
 </html>
