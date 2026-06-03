@@ -28,17 +28,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(3,3,3,.97);b
 .view{display:none}
 .view.active{display:block}
 
-/* ── HERO with IMAGE CAROUSEL ── */
+/* HERO with IMAGE CAROUSEL */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden}
-
 .bg-carousel{position:absolute;inset:0;z-index:0}
 .bg-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s ease;background-size:cover;background-position:center;background-repeat:no-repeat}
 .bg-slide.active{opacity:1}
-
-/* Dark overlay for readability */
 .bg-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(3,3,3,.55) 0%,rgba(3,3,3,.4) 50%,rgba(3,3,3,.75) 100%);z-index:1}
-
-/* Hero content */
 .hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center}
 .hero-tag{font-family:'Space Mono',monospace;font-size:.7rem;letter-spacing:.3em;color:var(--neon);text-transform:uppercase;margin-bottom:1.5rem;border:1px solid rgba(0,255,0,.5);padding:.4rem 1rem;display:inline-block;background:rgba(0,0,0,.5);backdrop-filter:blur(6px)}
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,8.5rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.2rem;text-shadow:0 2px 40px rgba(0,0,0,.9)}
@@ -48,13 +43,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(3,3,3,.97);b
 .btn-primary:hover{background:#fff;transform:translateY(-2px)}
 .btn-outline{background:transparent;color:var(--neon);border:1px solid var(--neon);padding:.8rem 2rem;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.1em;cursor:pointer;transition:all .2s}
 .btn-outline:hover{background:var(--nglow)}
-
-/* Slide indicator dots */
 .hero-dots{position:relative;z-index:2;display:flex;gap:.5rem;margin-top:2.5rem}
 .hdot{width:28px;height:3px;background:rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
 .hdot.active{background:var(--neon);width:48px}
-
-/* Slide counter */
 .slide-counter{position:absolute;bottom:2rem;right:2.5rem;z-index:2;font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.6);letter-spacing:.2em}
 .slide-counter span{color:var(--neon)}
 
@@ -140,7 +131,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(3,3,3,.97);b
 
 /* COMMUNITY */
 .community-wrap{padding:7rem 2.5rem 5rem;max-width:1200px;margin:0 auto}
-.community-hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:5rem;padding-bottom:5rem;border-bottom:1px solid var(--border)}
+.community-hero{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
 @media(max-width:768px){.community-hero{grid-template-columns:1fr}}
 .comm-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:.95;letter-spacing:.03em;margin-bottom:1.5rem}
 .comm-headline span{color:var(--neon)}
@@ -188,7 +179,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(3,3,3,.97);b
 .cpanel-body.open{display:block}
 pre{font-family:'Space Mono',monospace;font-size:.68rem;line-height:1.7;color:#ccc;white-space:pre-wrap}
 .kw{color:#ff79c6}.str{color:var(--neon)}.tp{color:#8be9fd}.fd{color:#f8f8f2}.cm{color:#555}
-.rsvp-section{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--border)}
+.rsvp-section{margin-top:4rem;padding-top:4rem;border-top:1px solid var(--border)}
 .rsvp-section-hdr{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:2.5rem}
 .rsvp-sec-label{font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.25em;color:var(--neon);text-transform:uppercase;white-space:nowrap}
 .rsvp-sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,4vw,3.5rem);letter-spacing:.05em;line-height:1}
@@ -222,12 +213,28 @@ pre{font-family:'Space Mono',monospace;font-size:.68rem;line-height:1.7;color:#c
 .ric-tag{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--border);padding:.25rem .6rem;color:var(--muted)}
 .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--neon),transparent);opacity:.22}
 
-.brand-showcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:3rem 0}
+/* FIX 1: Featured Brands section at bottom of community (after RSVP) */
+.brand-showcase{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin:1.5rem 0}
 .brand-card{background:var(--s1);border:1px solid var(--border);padding:1.5rem;cursor:pointer;transition:.25s}
 .brand-card:hover{border-color:var(--neon);transform:translateY(-4px);box-shadow:0 0 20px rgba(0,255,0,.12)}
 .brand-card-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--neon);letter-spacing:.05em}
 .brand-card-body{color:var(--muted);font-size:.85rem;margin-top:.5rem}
-.brands-wrap{padding:7rem 2.5rem 5rem;max-width:1400px;margin:0 auto}
+
+/* FIX 2: Brands page - sidebar layout matching actual streetsouk.com */
+.brands-wrap{padding:7rem 0 5rem;max-width:1400px;margin:0 auto;display:flex;gap:0}
+.brands-sidebar{width:220px;flex-shrink:0;padding:0 1.5rem;border-right:1px solid var(--border);position:sticky;top:7rem;max-height:calc(100vh - 7rem);overflow-y:auto;padding-top:2rem}
+.brands-sidebar::-webkit-scrollbar{width:3px}
+.brands-sidebar::-webkit-scrollbar-track{background:transparent}
+.brands-sidebar::-webkit-scrollbar-thumb{background:var(--border)}
+.brands-sidebar-title{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.brand-sidebar-item{display:block;font-family:'DM Sans',sans-serif;font-size:.88rem;color:var(--muted);padding:.4rem 0;cursor:pointer;transition:color .15s;text-decoration:none;border:none;background:none;text-align:left;width:100%}
+.brand-sidebar-item:hover{color:var(--text)}
+.brand-sidebar-item.active{color:var(--neon);font-weight:500}
+.brands-main{flex:1;padding:2rem 2.5rem;min-width:0}
+.brands-main-header{margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.brands-main-title{font-family:'Bebas Neue',sans-serif;font-size:3rem;letter-spacing:.05em;line-height:1}
+.brands-product-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+@media(max-width:1100px){.brands-product-grid{grid-template-columns:repeat(2,1fr)}}
 
 footer{border-top:1px solid var(--border)}
 .foot-top{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:2rem;padding:3rem 2.5rem}
@@ -267,14 +274,11 @@ footer{border-top:1px solid var(--border)}
   </div>
 </nav>
 
-<!-- ══ HOME ══ -->
+<!-- HOME -->
 <div class="view active" id="view-home">
   <div class="hero">
-    <!-- IMAGE BG CAROUSEL -->
     <div class="bg-carousel" id="bg-carousel"></div>
     <div class="bg-overlay"></div>
-
-    <!-- TEXT CONTENT -->
     <div class="hero-content">
       <span class="hero-tag">Street Souk Uni Tour &#x2019;26 &mdash; Live Now</span>
       <h1>AFRICA&#x27;S<br><span>BIGGEST</span><br>STREETWEAR</h1>
@@ -282,7 +286,6 @@ footer{border-top:1px solid var(--border)}
       <a class="btn-primary" onclick="showView('store')">Shop the Drop</a>
       <div class="hero-dots" id="hero-dots"></div>
     </div>
-
     <div class="slide-counter"><span id="slide-cur">01</span> / <span id="slide-tot">06</span></div>
   </div>
 
@@ -303,7 +306,7 @@ footer{border-top:1px solid var(--border)}
   </div>
 </div>
 
-<!-- ══ STORE ══ -->
+<!-- STORE -->
 <div class="view" id="view-store">
   <div class="store-wrap">
     <div class="breadcrumb">
@@ -320,7 +323,7 @@ footer{border-top:1px solid var(--border)}
   </div>
 </div>
 
-<!-- ══ COMMUNITY ══ -->
+<!-- COMMUNITY — FIX 1: Featured Brands moved BELOW registration + RSVP -->
 <div class="view" id="view-community">
   <div class="community-wrap">
     <div class="community-hero">
@@ -334,7 +337,7 @@ footer{border-top:1px solid var(--border)}
           <div class="cstat"><div class="cstat-num">8M+</div><div class="cstat-lbl">Impressions</div></div>
         </div>
         <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <button class="btn-primary" onclick="document.getElementById('reg-anchor').scrollIntoView({behavior:'smooth'})">Register Brand</button>
+          <button class="btn-primary" onclick="showView('community');setTimeout(()=>document.getElementById('reg-anchor').scrollIntoView({behavior:'smooth'}),120)">Register Brand</button>
           <button class="btn-outline" onclick="showView('brands')">View All Brands</button>
         </div>
       </div>
@@ -363,17 +366,11 @@ footer{border-top:1px solid var(--border)}
       </div>
     </div>
 
-    
-<div class="home-sec-hdr" style="margin-top:4rem">
-<h2 class="home-sec-title">FEATURED BRANDS</h2>
-</div>
-<div class="brand-showcase">
-<div class="brand-card" onclick="showView('brands')"><div class="brand-card-title">BOLAPSD</div><div class="brand-card-body">Streetwear exclusives and varsity-inspired drops.</div></div>
-<div class="brand-card" onclick="showView('brands')"><div class="brand-card-title">VOID</div><div class="brand-card-body">Underground Lagos culture and heavyweight silhouettes.</div></div>
-<div class="brand-card" onclick="showView('brands')"><div class="brand-card-title">JBS</div><div class="brand-card-body">Identity collection and exclusive collaborations.</div></div>
-<div class="brand-card" onclick="showView('brands')"><div class="brand-card-title">SENUSSI</div><div class="brand-card-body">Luxury African craftsmanship and accessories.</div></div>
-</div>
-<div id="reg-anchor"></div>
+  </div><!-- end community-wrap -->
+
+<!-- BRAND REGISTRATION — full width, still inside view-community -->
+<div id="reg-anchor" style="border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:4rem 2.5rem">
     <div class="reg-panel">
       <div class="reg-panel-hdr">
         <div class="reg-panel-title">Brand Registration</div>
@@ -428,59 +425,62 @@ footer{border-top:1px solid var(--border)}
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="rsvp-section" id="rsvp-anchor">
-      <div class="rsvp-section-hdr">
-        <span class="rsvp-sec-label">Feature C</span>
-        <h2 class="rsvp-sec-title">Event RSVP</h2>
-        <span class="tech-badge">Brevo + Supabase</span>
-      </div>
-      <div class="rsvp-layout">
-        <div class="rsvp-box">
-          <div class="evt-card">
-            <div class="evt-meta">
-              <div class="emi"><div class="emlbl">Date</div><div class="emval">14 June 2026</div></div>
-              <div class="emi"><div class="emlbl">Location</div><div class="emval">Victoria Island, Lagos</div></div>
-              <div class="emi"><div class="emlbl">Format</div><div class="emval">Pop-up + DJ Set</div></div>
-            </div>
-            <div class="evt-name">STREET SOUK<br>LAGOS VII</div>
-            <div class="evt-desc">50+ brands. One weekend. The biggest streetwear marketplace in West Africa returns to VI.</div>
-            <div class="evt-counter">
-              <div><div class="tnum" id="ticket-count">127</div><div class="tctr-lbl">RSVPs confirmed</div><div class="cap-warn">&#9679; Limited capacity</div></div>
-            </div>
+<!-- EVENT RSVP — full width section -->
+<div id="rsvp-anchor" style="border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:4rem 2.5rem">
+    <div class="rsvp-section-hdr">
+      <span class="rsvp-sec-label">Feature C</span>
+      <h2 class="rsvp-sec-title">Event RSVP</h2>
+      <span class="tech-badge">Brevo + Supabase</span>
+    </div>
+    <div class="rsvp-layout">
+      <div class="rsvp-box">
+        <div class="evt-card">
+          <div class="evt-meta">
+            <div class="emi"><div class="emlbl">Date</div><div class="emval">14 June 2026</div></div>
+            <div class="emi"><div class="emlbl">Location</div><div class="emval">Victoria Island, Lagos</div></div>
+            <div class="emi"><div class="emlbl">Format</div><div class="emval">Pop-up + DJ Set</div></div>
           </div>
-          <div class="rsvp-form">
-            <div class="rsvp-fields">
-              <div class="fg" style="margin:0"><label class="flbl">Full Name</label><input class="finput" id="rsvp-name" placeholder="Your name"/></div>
-              <div class="fg" style="margin:0"><label class="flbl">Email</label><input class="finput" type="email" id="rsvp-email" placeholder="your@email.com"/></div>
-              <button class="btn-primary" style="width:100%;font-size:1.1rem;padding:1rem" onclick="submitRSVP()">RSVP NOW</button>
-            </div>
-            <div class="brevo-log" id="brevo-log">
-              <div class="ll" id="ll1"><span class="lp">[API]</span> POST /api/rsvp &mdash; received</div>
-              <div class="ll" id="ll2"><span class="lp">[Supabase]</span> Inserting into <span class="la">event_rsvps</span>...</div>
-              <div class="ll" id="ll3"><span class="lp">[Supabase]</span> <span class="lok">&#10003; Row inserted</span> &mdash; id: <span id="rsvp-id">&#x2014;</span></div>
-              <div class="ll" id="ll4"><span class="lp">[Brevo]</span> Triggering workflow <span class="lw">user_rsvp_confirmed</span>...</div>
-              <div class="ll" id="ll5"><span class="lp">[Brevo]</span> Template <span class="la">#14</span> dispatched &#8594; <span id="rsvp-email-out">&#x2014;</span></div>
-              <div class="ll" id="ll6"><span class="lp">[API]</span> <span class="lok">200 OK</span> &mdash; RSVP confirmed &#10003;</div>
-            </div>
+          <div class="evt-name">STREET SOUK<br>LAGOS VII</div>
+          <div class="evt-desc">50+ brands. One weekend. The biggest streetwear marketplace in West Africa returns to VI.</div>
+          <div class="evt-counter">
+            <div><div class="tnum" id="ticket-count">127</div><div class="tctr-lbl">RSVPs confirmed</div><div class="cap-warn">&#9679; Limited capacity</div></div>
           </div>
         </div>
-        <div class="rsvp-info-panel">
-          <div class="rsvp-info-card">
-            <div class="ric-label">About the Event</div>
-            <div class="ric-title">SS LAGOS VII</div>
-            <div class="ric-body">Africa&#x27;s largest streetwear pop-up returns to Victoria Island. 50+ brands, live DJ sets, design competitions, and exclusive on-site drops.</div>
-            <div class="ric-tags"><span class="ric-tag">Free Entry</span><span class="ric-tag">50+ Brands</span><span class="ric-tag">Live DJ</span><span class="ric-tag">Exclusive Drops</span></div>
+        <div class="rsvp-form">
+          <div class="rsvp-fields">
+            <div class="fg" style="margin:0"><label class="flbl">Full Name</label><input class="finput" id="rsvp-name" placeholder="Your name"/></div>
+            <div class="fg" style="margin:0"><label class="flbl">Email</label><input class="finput" type="email" id="rsvp-email" placeholder="your@email.com"/></div>
+            <button class="btn-primary" style="width:100%;font-size:1.1rem;padding:1rem" onclick="submitRSVP()">RSVP NOW</button>
           </div>
-          <div class="rsvp-info-card">
-            <div class="ric-label">Past Events</div>
-            <div id="past-events-list"></div>
+          <div class="brevo-log" id="brevo-log">
+            <div class="ll" id="ll1"><span class="lp">[API]</span> POST /api/rsvp &mdash; received</div>
+            <div class="ll" id="ll2"><span class="lp">[Supabase]</span> Inserting into <span class="la">event_rsvps</span>...</div>
+            <div class="ll" id="ll3"><span class="lp">[Supabase]</span> <span class="lok">&#10003; Row inserted</span> &mdash; id: <span id="rsvp-id">&#x2014;</span></div>
+            <div class="ll" id="ll4"><span class="lp">[Brevo]</span> Triggering workflow <span class="lw">user_rsvp_confirmed</span>...</div>
+            <div class="ll" id="ll5"><span class="lp">[Brevo]</span> Template <span class="la">#14</span> dispatched &#8594; <span id="rsvp-email-out">&#x2014;</span></div>
+            <div class="ll" id="ll6"><span class="lp">[API]</span> <span class="lok">200 OK</span> &mdash; RSVP confirmed &#10003;</div>
           </div>
-          <div class="rsvp-info-card" style="background:#000;border-color:var(--neon)">
-            <div class="ric-label">Brevo Workflow</div>
-            <div class="ric-body" style="font-family:'Space Mono',monospace;font-size:.65rem;line-height:1.8">
-              RSVP Submit &#8594;<br><span style="color:var(--neon)">Supabase Insert</span> &#8594;<br><span style="color:#8be9fd">Next.js /api/rsvp</span> &#8594;<br><span style="color:#f1fa8c">Brevo Template #14</span> &#8594;<br><span style="color:var(--neon)">&#10003; Email Confirmed</span>
-            </div>
+        </div>
+      </div>
+      <div class="rsvp-info-panel">
+        <div class="rsvp-info-card">
+          <div class="ric-label">About the Event</div>
+          <div class="ric-title">SS LAGOS VII</div>
+          <div class="ric-body">Africa&#x27;s largest streetwear pop-up returns to Victoria Island. 50+ brands, live DJ sets, design competitions, and exclusive on-site drops.</div>
+          <div class="ric-tags"><span class="ric-tag">Free Entry</span><span class="ric-tag">50+ Brands</span><span class="ric-tag">Live DJ</span><span class="ric-tag">Exclusive Drops</span></div>
+        </div>
+        <div class="rsvp-info-card">
+          <div class="ric-label">Past Events</div>
+          <div id="past-events-list"></div>
+        </div>
+        <div class="rsvp-info-card" style="background:#000;border-color:var(--neon)">
+          <div class="ric-label">Brevo Workflow</div>
+          <div class="ric-body" style="font-family:'Space Mono',monospace;font-size:.65rem;line-height:1.8">
+            RSVP Submit &#8594;<br><span style="color:var(--neon)">Supabase Insert</span> &#8594;<br><span style="color:#8be9fd">Next.js /api/rsvp</span> &#8594;<br><span style="color:#f1fa8c">Brevo Template #14</span> &#8594;<br><span style="color:var(--neon)">&#10003; Email Confirmed</span>
           </div>
         </div>
       </div>
@@ -488,28 +488,46 @@ footer{border-top:1px solid var(--border)}
   </div>
 </div>
 
+<!-- FEATURED BRANDS — full width section -->
+<div style="border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:4rem 2.5rem">
+    <div class="home-sec-hdr" style="margin-bottom:1.5rem">
+      <h2 class="home-sec-title">FEATURED BRANDS</h2>
+      <a class="view-all" onclick="showView('brands')">View All Brands &#8594;</a>
+    </div>
+    <div class="brand-showcase">
+      <div class="brand-card" onclick="showBrandPage('BOLAPSD')"><div class="brand-card-title">BOLAPSD</div><div class="brand-card-body">Streetwear exclusives and varsity-inspired drops.</div></div>
+      <div class="brand-card" onclick="showBrandPage('VOID Lagos')"><div class="brand-card-title">VOID</div><div class="brand-card-body">Underground Lagos culture and heavyweight silhouettes.</div></div>
+      <div class="brand-card" onclick="showBrandPage('JBS')"><div class="brand-card-title">JBS</div><div class="brand-card-body">Identity collection and exclusive collaborations.</div></div>
+      <div class="brand-card" onclick="showBrandPage('Senussi')"><div class="brand-card-title">SENUSSI</div><div class="brand-card-body">Luxury African craftsmanship and accessories.</div></div>
+    </div>
+  </div>
+</div>
 
+</div><!-- end view-community -->
+
+<!-- FIX 2: Brands page — sidebar + product grid layout matching real streetsouk.com -->
 <div class="view" id="view-brands">
-<div class="brands-wrap">
-<div class="breadcrumb">HOME <span>›</span> <span class="neon">BRANDS</span></div>
-<div class="col-header">
-<div>
-<div class="col-title">STREET SOUK BRANDS</div>
-<div class="col-meta">DISCOVER THE ECOSYSTEM</div>
-</div>
-</div>
-
-<div class="brand-showcase">
-<div class="brand-card"><div class="brand-card-title">BOLAPSD</div><div class="brand-card-body">Exclusive jerseys, polos and limited drops.</div></div>
-<div class="brand-card"><div class="brand-card-title">VOID</div><div class="brand-card-body">Oversized silhouettes and contemporary Lagos streetwear.</div></div>
-<div class="brand-card"><div class="brand-card-title">JBS</div><div class="brand-card-body">Identity series collaborations and accessories.</div></div>
-<div class="brand-card"><div class="brand-card-title">SENUSSI</div><div class="brand-card-body">Premium belts and luxury heritage pieces.</div></div>
-<div class="brand-card"><div class="brand-card-title">AFOLARINN</div><div class="brand-card-body">Bombers, hoodies and Naija-inspired essentials.</div></div>
-<div class="brand-card"><div class="brand-card-title">KROWN STUDIOS</div><div class="brand-card-body">Workwear and utility-focused collections.</div></div>
-<div class="brand-card"><div class="brand-card-title">ZAYLEVELTEN</div><div class="brand-card-body">Graphic tees celebrating African creativity.</div></div>
-<div class="brand-card"><div class="brand-card-title">STREET SOUK</div><div class="brand-card-body">Official merchandise and Uni Tour exclusives.</div></div>
-</div>
-</div>
+  <div class="brands-wrap">
+    <!-- Left sidebar: brand list -->
+    <div class="brands-sidebar" id="brands-sidebar">
+      <div class="brands-sidebar-title">All Brands</div>
+      <!-- populated by JS -->
+    </div>
+    <!-- Right: brand header + product grid -->
+    <div class="brands-main">
+      <div class="brands-main-header">
+        <div class="breadcrumb" style="margin-bottom:.75rem">
+          <a onclick="showView('home')">HOME</a><span>&#8250;</span>
+          <a onclick="showView('store')">STORE</a><span>&#8250;</span>
+          <span class="neon" id="brand-crumb">BOLAPSD</span>
+        </div>
+        <div class="brands-main-title" id="brand-page-title">BOLAPSD</div>
+      </div>
+      <div class="brands-product-grid" id="brand-product-grid"></div>
+      <div id="brand-empty" style="display:none;padding:3rem 0;font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);letter-spacing:.1em">NO PRODUCTS FOUND FOR THIS BRAND YET.</div>
+    </div>
+  </div>
 </div>
 
 <!-- MODAL -->
@@ -556,7 +574,7 @@ footer{border-top:1px solid var(--border)}
 </footer>
 
 <script>
-// ── PRODUCTS (15 total) ──────────────────────────────────────────────────
+// PRODUCTS
 const PRODUCTS=[
   {id:"p001",col:"exclusives",title:"SS X JBS IDENTITY HAT (CAMO)",brand:"JBS",price:"NGN 90,000",sizes:["One Size"],status:"available",excl:true,desc:"Limited collab between Street Souk and JBS. Camo colourway with embroidered identity patch. Only 50 units.",shape:"hat",bg:"#1a1a14"},
   {id:"p002",col:"exclusives",title:"SS X JBS IDENTITY HAT (DENIM)",brand:"JBS",price:"NGN 90,000",sizes:["One Size"],status:"available",excl:true,desc:"Denim wash with SS x JBS co-branded patch. Part of the SS Uni Tour '26 drop.",shape:"hat2",bg:"#141820"},
@@ -577,43 +595,26 @@ const PRODUCTS=[
   {id:"p017",col:"new-arrivals",title:"SS CAMPUS CAP",brand:"Street Souk Official",price:"NGN 15,000",sizes:["One Size"],status:"available",excl:false,desc:"6-panel structured cap in black with SS Uni Tour '26 embroidery. Adjustable strap.",shape:"hat",bg:"#111"},
 ];
 
-// ── IMAGE CAROUSEL SCENES (using Unsplash street fashion / event images) ──
-const CAROUSEL_IMAGES = [
-  {
-    // Edgy, late-night Lagos Alté youth fashion style
-    url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=80",
-    label: "Lagos Style"
-  },
-  {
-
-    url: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1600&auto=format&fit=crop&q=80",
-
-    label: "Community"
-
-  },
-    {
-    // High-energy Afro-skate & street culture vibe
-    url: "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1600&auto=format&fit=crop&q=80",
-    label: "Street Souk Culture"
-  },
-  {
-    // Hypebeast-style exclusive drops and sneakers
-    url: "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1600&auto=format&fit=crop&q=80",
-    label: "Exclusive Drops"
-  },
-  {
-    // Raw, high-fashion graphic tee / event merch look
-    url: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1600&auto=format&fit=crop&q=80",
-    label: "Pop-Up Events"
-  },
-  {
-    // Heavy Baggy Jeans / Oversized Skater-Streetwear aesthetic
-    url: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1600&auto=format&fit=crop&q=80",
-    label: "Streetwear Drip"
-  }
+// All brands for sidebar (FIX 2)
+const ALL_BRANDS = [
+  "1960","Active Worldwide","Almost x Angels","AVID","BOLAPSD","BONFO","Casmir Hero",
+  "Clapped Mob","Cynicalbehaviours","Darkagys","Decade Of No Pain","DELOCA Studios",
+  "Dolore","Eleganza","Go-Crazy","IYOO CARTEL","JBS","Lace By Cataleya",
+  "Lost Archives X Shakkar","Lovenangels","Mushi World","NINE","Afolarinn",
+  "Krown Studios","ZayLevelTen","Street Souk Official","Senussi","VOID Lagos","Unknown"
 ];
 
-// ── SVG product shapes ──────────────────────────────────────────────────
+// Carousel images
+const CAROUSEL_IMAGES = [
+  {url:"https://images.unsplash.com/photo-1509631179647-0177331693ae?w=1600&auto=format&fit=crop&q=80",label:"Lagos Style"},
+  {url:"https://images.unsplash.com/photo-1523398002811-999ca8dec234?w=1600&auto=format&fit=crop&q=80",label:"Community"},
+  {url:"https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=1600&auto=format&fit=crop&q=80",label:"Street Souk Culture"},
+  {url:"https://images.unsplash.com/photo-1552346154-21d32810aba3?w=1600&auto=format&fit=crop&q=80",label:"Exclusive Drops"},
+  {url:"https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=1600&auto=format&fit=crop&q=80",label:"Pop-Up Events"},
+  {url:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=1600&auto=format&fit=crop&q=80",label:"Streetwear Drip"}
+];
+
+// SVG shapes
 function svg(shape,size){
   const s=size==='lg'?130:80;
   const shapes={
@@ -633,54 +634,30 @@ function svg(shape,size){
   return shapes[shape]||shapes['tee'];
 }
 
-// ── IMAGE CAROUSEL ───────────────────────────────────────────────────────
+// Carousel
 let bgIdx=0,bgTimer=null;
-
 function buildBgCarousel(){
   const container=document.getElementById('bg-carousel');
   const dotsEl=document.getElementById('hero-dots');
   if(!container)return;
-
-  // Build slides with real images
-  container.innerHTML=CAROUSEL_IMAGES.map((img,i)=>`
-    <div class="bg-slide${i===0?' active':''}" 
-         style="background-image:url('${img.url}');background-size:cover;background-position:center top">
-    </div>`).join('');
-
-  // Build dots
-  dotsEl.innerHTML=CAROUSEL_IMAGES.map((_,i)=>`
-    <div class="hdot${i===0?' active':''}" onclick="goBgSlide(${i})"></div>`).join('');
-
+  container.innerHTML=CAROUSEL_IMAGES.map((img,i)=>`<div class="bg-slide${i===0?' active':''}" style="background-image:url('${img.url}');background-size:cover;background-position:center top"></div>`).join('');
+  dotsEl.innerHTML=CAROUSEL_IMAGES.map((_,i)=>`<div class="hdot${i===0?' active':''}" onclick="goBgSlide(${i})"></div>`).join('');
   document.getElementById('slide-tot').textContent=String(CAROUSEL_IMAGES.length).padStart(2,'0');
   startBgTimer();
-
-  // Preload all images
-  CAROUSEL_IMAGES.forEach(img=>{
-    const im=new Image();
-    im.src=img.url;
-  });
+  CAROUSEL_IMAGES.forEach(img=>{const im=new Image();im.src=img.url;});
 }
-
 function goBgSlide(idx){
   const slides=document.querySelectorAll('.bg-slide');
   const dots=document.querySelectorAll('.hdot');
-  slides[bgIdx].classList.remove('active');
-  dots[bgIdx].classList.remove('active');
-  bgIdx=idx;
-  slides[bgIdx].classList.add('active');
-  dots[bgIdx].classList.add('active');
+  slides[bgIdx].classList.remove('active');dots[bgIdx].classList.remove('active');
+  bgIdx=idx;slides[bgIdx].classList.add('active');dots[bgIdx].classList.add('active');
   document.getElementById('slide-cur').textContent=String(bgIdx+1).padStart(2,'0');
   startBgTimer();
 }
+function startBgTimer(){clearInterval(bgTimer);bgTimer=setInterval(()=>goBgSlide((bgIdx+1)%CAROUSEL_IMAGES.length),4000);}
 
-function startBgTimer(){
-  clearInterval(bgTimer);
-  bgTimer=setInterval(()=>goBgSlide((bgIdx+1)%CAROUSEL_IMAGES.length),4000);
-}
-
-// ── PRODUCT GRID ────────────────────────────────────────────────────────
+// Product card
 let cartCount=0;
-
 function card(p,delay){
   const sold=p.status==='sold-out';
   return`<div class="product-card" style="animation-delay:${delay}s" onclick="openProduct('${p.id}')">
@@ -696,14 +673,13 @@ function card(p,delay){
     </div>
   </div>`;
 }
-
 function renderGrid(id,products,limit){
   const el=document.getElementById(id);if(!el)return;
   const list=limit?products.slice(0,limit):products;
   el.innerHTML=list.map((p,i)=>card(p,i*0.06)).join('');
 }
 
-// ── VIEWS ────────────────────────────────────────────────────────────────
+// Views
 function showView(name){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-'+name).classList.add('active');
@@ -723,7 +699,41 @@ function showCollection(col){
   showView('store');
 }
 
-// ── MODAL ────────────────────────────────────────────────────────────────
+// FIX 2+3: Brands page with sidebar, and clicking brand filters to that brand
+function buildBrandsSidebar(){
+  const sidebar=document.getElementById('brands-sidebar');
+  if(!sidebar)return;
+  // Get unique brands from products + fill with ALL_BRANDS list
+  const productBrands=[...new Set(PRODUCTS.map(p=>p.brand))];
+  // Merge: product brands first (they have items), then others
+  const sorted=[...productBrands,...ALL_BRANDS.filter(b=>!productBrands.includes(b))].sort();
+  sidebar.innerHTML='<div class="brands-sidebar-title">All Brands</div>'+
+    sorted.map(b=>`<button class="brand-sidebar-item" onclick="showBrandPage('${b}')">${b}</button>`).join('');
+}
+
+function showBrandPage(brandName){
+  // Update sidebar active state
+  document.querySelectorAll('.brand-sidebar-item').forEach(el=>{
+    el.classList.toggle('active', el.textContent===brandName);
+  });
+  // Update header
+  document.getElementById('brand-crumb').textContent=brandName.toUpperCase();
+  document.getElementById('brand-page-title').textContent=brandName.toUpperCase();
+  // Filter products
+  const brandProducts=PRODUCTS.filter(p=>p.brand===brandName);
+  const grid=document.getElementById('brand-product-grid');
+  const empty=document.getElementById('brand-empty');
+  if(brandProducts.length===0){
+    grid.innerHTML='';
+    empty.style.display='block';
+  } else {
+    empty.style.display='none';
+    grid.innerHTML=brandProducts.map((p,i)=>card(p,i*0.06)).join('');
+  }
+  showView('brands');
+}
+
+// Modal
 function openProduct(id){
   const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
   document.getElementById('mc-product').textContent=p.title;
@@ -755,7 +765,7 @@ function bagIt(){document.getElementById('bag-btn').style.display='none';documen
 function toggleAcc(btn){const b=btn.nextElementSibling;const i=btn.querySelector('.acc-icon');b.classList.toggle('open');i.textContent=b.classList.contains('open')?'\u2014':'+';}
 function togglePanel(hdr){const b=hdr.nextElementSibling;const a=hdr.querySelector('span:last-child');b.classList.toggle('open');a.textContent=b.classList.contains('open')?'\u25b2 collapse':'\u25bc expand';}
 
-// ── FORM ─────────────────────────────────────────────────────────────────
+// Form
 function goStep(n){
   document.querySelectorAll('.fstep').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.step-tab').forEach(t=>t.classList.remove('active'));
@@ -769,7 +779,7 @@ function submitForm(){
   setTimeout(()=>{const bn=document.getElementById('brand-name').value||'VOID Lagos';const dn=document.getElementById('designer-name').value||'Demo User';const cat=document.getElementById('category').value||'Streetwear';const ig=document.getElementById('instagram').value||'@voiddemo';const ts=new Date().toISOString();const rid='br_'+Math.random().toString(36).substr(2,8);const t=document.getElementById('sb-toast');document.getElementById('toast-bdy').innerHTML='<span class="tkey">id</span>: '+rid+'<br><span class="tkey">brand_name</span>: <span class="trow">"'+bn+'"</span><br><span class="tkey">designer</span>: <span class="trow">"'+dn+'"</span><br><span class="tkey">category</span>: <span class="trow">"'+cat+'"</span><br><span class="tkey">created_at</span>: <span class="trow">"'+ts+'"</span>';t.style.display='block';btn.textContent='\u2713 Application Submitted';btn.style.opacity='.5';},900);
 }
 
-// ── RSVP ─────────────────────────────────────────────────────────────────
+// RSVP
 function submitRSVP(){
   const email=document.getElementById('rsvp-email').value||'demo@streetsouk.com';
   const log=document.getElementById('brevo-log');log.style.display='block';
@@ -779,10 +789,9 @@ function submitRSVP(){
   ls.forEach((id,i)=>setTimeout(()=>{if(i>0)document.getElementById(ls[i-1]).classList.remove('active');document.getElementById(id).classList.add('active');if(i===5){const c=document.getElementById('ticket-count');c.textContent=parseInt(c.textContent)+1;}},i*500));
 }
 
-// ── COMMUNITY DATA ────────────────────────────────────────────────────────
+// Community data
 const UPCOMING=[{name:"SS UNILAG '26",date:"21 Jun 2026",loc:"University of Lagos"},{name:"SS BELLS '26",date:"28 Jun 2026",loc:"Bells University, Ota"},{name:"SS UNIUI '26",date:"5 Jul 2026",loc:"University of Ibadan"}];
 const PAST=[{name:"SS Lagos '25",att:"8,400+"},{name:"SS Accra '25",att:"5,200+"},{name:"SS London '24",att:"3,800+"}];
-
 function buildCommunityData(){
   const ue=document.getElementById('upcoming-events');
   if(ue)ue.innerHTML=UPCOMING.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border)"><div><div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em">${e.name}</div><div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">${e.loc}</div></div><div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--neon)">${e.date}</div></div>`).join('');
@@ -790,21 +799,17 @@ function buildCommunityData(){
   if(pe)pe.innerHTML=PAST.map(e=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.6rem 0;border-bottom:1px solid var(--border)"><div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em">${e.name}</div><div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--neon)">${e.att}</div></div>`).join('');
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────────
+// INIT
 buildBgCarousel();
-
-// Home: 4 exclusives, 8 new arrivals
 renderGrid('home-excl-grid', PRODUCTS.filter(p=>p.col==='exclusives'), 4);
-renderGrid('home-new-grid', PRODUCTS.filter(p=>p.col==='new-arrivals'), 8);
-
-// Pre-populate the store grid data behind the scenes
-const defaultProducts = PRODUCTS;
-document.getElementById('col-title').textContent = 'ALL PRODUCTS';
-document.getElementById('col-crumb').textContent = 'ALL PRODUCTS';
-document.getElementById('col-meta').textContent = defaultProducts.length + ' ITEMS';
-renderGrid('store-grid', defaultProducts);
-
-// Explicitly ensure the default view is Discover (Home) on load
+renderGrid('home-new-grid', PRODUCTS.filter(p=>p.col==='new-arrivals'), 5);
+document.getElementById('col-title').textContent='ALL PRODUCTS';
+document.getElementById('col-crumb').textContent='ALL PRODUCTS';
+document.getElementById('col-meta').textContent=PRODUCTS.length+' ITEMS';
+renderGrid('store-grid', PRODUCTS);
+buildBrandsSidebar();
+// Default to BOLAPSD on brands page load
+showBrandPage('BOLAPSD');
 showView('home');
 buildCommunityData();
 </script>
